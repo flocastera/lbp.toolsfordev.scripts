@@ -19,6 +19,14 @@ then
     elif [ "$1" == "checkout" ] || [ "$1" == "gbr" ] ;
     then
         $SCRIPTS_PATH/checkout.sh $2 $3 $4 $5 $6
+
+    elif [ "$1" == "stash" ] || [ "$1" == "gsta" ] ;
+    then
+        $SCRIPTS_PATH/stash.sh $2 $3 $4 $5 $6
+    elif [ "$1" == "pop" ] || [ "$1" == "gstp" ] ;
+    then
+        $SCRIPTS_PATH/stash.sh pop $2 $3 $4 $5 $6
+
     elif [ "$1" == "state" ] || [ "$1" == "st" ] ;
     then
         $SCRIPTS_PATH/states.sh $2 $3 $4 $5 $6
@@ -50,6 +58,8 @@ then
         echo " - $(tput setaf 2)pull/gpl$(tput sgr 0)     => do a Git pull for all components/modules"
         echo " - $(tput setaf 2)reset/grs$(tput sgr 0)    => do a Git reset for all components/modules (with --hard option)"
         echo " - $(tput setaf 2)checkout/gbr$(tput sgr 0) => do a Git checkout to specified branch for all components/modules"
+        echo " - $(tput setaf 2)stash/gsta$(tput sgr 0)   => do a Git stash for all components/modules (can add 'pop')"
+        echo " - $(tput setaf 2)pop/gstp$(tput sgr 0)     => do a Git stash pop for all components/modules (equivalent to 'gsta pop')"
         echo "$(tput setaf 3)OTHER :$(tput sgr 0)"
         echo " - $(tput setaf 2)state/st$(tput sgr 0)     => do a ping on specified IP, or service name (ex: couchbase)"
         echo " - $(tput setaf 2)pom$(tput sgr 0)          => show pom version for all components/modules (-f/--full to also print dependencies)"
