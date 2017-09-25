@@ -1,19 +1,21 @@
 #!/bin/bash
 
 path="$(pwd)"
+server="https://git.sf.intra.laposte.fr/CC3_CAN/"
+gitExt=".git"
 echo
-for D in `cat repositories.txt`
+for repo in `cat repositories.txt`
 do
-	echo "Cloning repository $(tput setaf 2)$D$(tput sgr 0)"
-	if [ "$(grep -E '^https' -c)" == "0" ]
+	echo "Cloning repository $(tput setaf 2)$repo$(tput sgr 0)"
+	if [ "$(echo $repo | grep -E '^https' -c)" == "0" ] ;
 	then
-	    D="https://git.sf.intra.laposte.fr/CC3_CAN/$D"
+	    repo="$server$repo"
 	fi
-	if [ "$(grep -E '\.git$' -c)" == "0" ]
+	if [ "$(echo $repo | grep -E 'git$' -c)" == "0" ] ;
 	then
-	    D="$D.git"
+	    repo="$repo$gitExt"
 	fi
-	echo $D
-	git clone $D
+	echo $repo
+	git clone $repo
 	echo
 done
