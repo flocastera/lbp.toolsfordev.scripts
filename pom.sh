@@ -7,7 +7,7 @@ do
 	test="$(echo $D | grep -E '(module|composants)\-applicatif' -c)"
 	if [ $test -eq 1 ]
 	then
-		echo -n "$(tput setaf 2)$(echo $D | grep -Eo "[a-zA-Z]*$")$(tput sgr 0) : "
+		echo -n "$(tput setaf 2)$(echo $D | grep -Eo "(H[0-9]{2}\-)?[a-zA-Z]*$")$(tput sgr 0) : "
 		dirPath="$path$(echo $D | sed 's/^.//')"
 		cd $dirPath
 		res="$(grep -E "<version>.*</version>" pom.xml -m 2 | tail -1)"
