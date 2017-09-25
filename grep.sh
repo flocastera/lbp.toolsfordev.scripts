@@ -7,7 +7,7 @@ do
 	test="$(echo $D | grep -E '(module\-applicatif|composants\-applicatif|lbp\.toolsfordev)' -c)"
 	if [ $test -eq 1  ];
 	then
-	    defaultArgs="-nR --color --exclude-dir=\.(git|classpath|externalToolBuilders|project|settings) --exclude-dir=node_modules --exclude=npm-debug.log "
+	    defaultArgs="-nR --color --exclude-dir=\.(git|classpath|externalToolBuilders|project|settings) --exclude-dir=node_modules --exclude-dir=target --exclude=npm-debug.log "
 		echo "Grep results for $(tput setaf 2)$(echo $D | grep -Eo "(H[0-9]{2}\-)?[a-zA-Z]*$")$(tput sgr 0)"
 		echo "  Default args : $(tput setaf 3)$defaultArgs$(tput sgr 0)"
 		echo "  User args : $(tput setaf 3)$@$(tput sgr 0)"
