@@ -19,14 +19,12 @@ then
     elif [ "$1" == "checkout" ] || [ "$1" == "gbr" ] ;
     then
         $SCRIPTS_PATH/checkout.sh $2 $3 $4 $5 $6
-
     elif [ "$1" == "stash" ] || [ "$1" == "gsta" ] ;
     then
-        $SCRIPTS_PATH/stash.sh $2 $3 $4 $5 $6
+        $SCRIPTS_PATH/stash.sh st $3 $4 $5 $6
     elif [ "$1" == "pop" ] || [ "$1" == "gstp" ] ;
     then
         $SCRIPTS_PATH/stash.sh pop $2 $3 $4 $5 $6
-
     elif [ "$1" == "state" ] || [ "$1" == "st" ] ;
     then
         $SCRIPTS_PATH/states.sh $2 $3 $4 $5 $6
