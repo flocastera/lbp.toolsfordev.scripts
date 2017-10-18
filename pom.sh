@@ -15,7 +15,6 @@ then
             res="$(grep -E "<version>.*</version>" pom.xml -m 2 | tail -1)"
             res=${res:11}
             res="$(echo $res | sed 's/.\{10\}$//')"
-            # Printing POM composant version
             echo $res | grep --color -E "[0-9]{2,3}\-.*"
             if [ "$1" == "--full" ] || [ "$1" == "-f" ] ;
             then

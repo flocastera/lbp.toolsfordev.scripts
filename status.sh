@@ -39,6 +39,3 @@ then
 else
     echo "  ╘╧════> $(tput setaf 3)Modified/Added/Deleted/Merged files$(tput sgr 0)  : $modifiedFilesCount"
 fi
-
-
-echo $watchPatterns

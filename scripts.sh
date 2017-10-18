@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Getting paths and other configuration variables
 source $WSP_PATH/lbp.toolsfordev.scripts/configuration.sh
 
 if [ $# -gt 0 ]
