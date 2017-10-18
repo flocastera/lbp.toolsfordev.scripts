@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SCRIPTS_PATH=$WSP_PATH/lbp.toolsfordev.scripts
+source $WSP_PATH/lbp.toolsfordev.scripts/configuration.sh
 
 if [ $# -gt 0 ]
 then

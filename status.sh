@@ -2,6 +2,7 @@
 
 path="$(pwd)"
 modifiedFilesCount=0
+
 for D in `find . -maxdepth 1 -type d`
 do
 	test="$(echo $D | grep -E '(module|composants)\-applicatif' -c)"
@@ -38,3 +39,6 @@ then
 else
     echo "  ╘╧════> $(tput setaf 3)Modified/Added/Deleted/Merged files$(tput sgr 0)  : $modifiedFilesCount"
 fi
+
+
+echo $watchPatterns
