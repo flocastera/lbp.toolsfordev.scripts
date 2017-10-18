@@ -14,7 +14,7 @@ do
 		cd $dirPath
 		if [ "$1" == '-h' ] ;
 		then
-		    result="$(git status -s | grep -Ev 'AccreditationService|pom\.xml|\.properties|SecurityBouchonConfig|\.classpath|\.settings')"
+		    result="$(git status -s | grep -Ev 'AccreditationService|pom\.xml|\.properties|SecurityBouchonConfig|\.classpath|\.settings|\.gitignore')"
 		    nb=$(echo "$result" | sed '/^\s*$/d' | wc -l)
 		    let "modifiedFilesCount = $modifiedFilesCount + nb"
 		    echo -n "$(tput setaf 2)"

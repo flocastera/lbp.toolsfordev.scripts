@@ -5,7 +5,7 @@ if [ "$#" == "0" ] || [ "$1" == "--full" ] || [ "$1" == "-f" ] ;
 then
     for D in `find $WSP_PATH -maxdepth 1 -type d`
     do
-        test="$(echo $D | grep -E '(module|composants)\-applicatif' -c)"
+        test="$(echo $D | grep -E "$watchPatterns" -c)"
         if [ $test -eq 1 ]
         then
             echo ""
