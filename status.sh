@@ -36,5 +36,5 @@ if [ "$modifiedFilesCount" == "0" ] ;
 then
     echo "  ╘╧════> $(tput setaf 2)Workspace is clean !$(tput sgr 0)"
 else
-    echo "  ||=====> $(tput setaf 3)Modified/Added/Deleted/Merged files$(tput sgr 0)  : $modifiedFilesCount"
+    echo "  ╘╧════> $(tput setaf 3)Modified/Added/Deleted/Merged files$(tput sgr 0)  : $modifiedFilesCount"
 fi
