@@ -21,6 +21,8 @@ do
 		    echo "$result" | grep -E "^M.*"
 		    echo -n "$(tput sgr 0)$(tput setaf 1)"
 		    echo "$result" | grep -E "^\sM.*"
+		    echo -n "$(tput sgr 0)$(tput setaf 3)"
+		    echo "$result" | grep -E "^\?.*"
 		    echo -n "$(tput sgr 0)"
 		else
             git status -s
