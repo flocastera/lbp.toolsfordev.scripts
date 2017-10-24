@@ -18,11 +18,11 @@ then
             echo $res | grep --color -E "[0-9]{2,3}\-.*"
             if [ "$1" == "--full" ] || [ "$1" == "-f" ] ;
             then
-                res="$(awk '/<properties>/,/<\/properties>/' pom.xml | grep -Eo '(composant\-applicatif|module)+\-[a-zA-Z0-9]+.*>0[0-9]{1}_[0-9]{2}_[0-9]{2}\.[0-9]{2,3}(\-SNAPSHOT){0,1}' pom.xml | sed 's/.adb.version>/ /g ' | sort  | sed 's/composant-applicatif-/ ├──/g ')"
+                res="$(awk '/<properties>/,/<\/properties>/' pom.xml | grep -Eo '(composant\-applicatif|module)+\-[a-zA-Z0-9]+.*>0[0-9]{1}_[0-9]{2}_[0-9]{2}\.[0-9]{2,3}(\-SNAPSHOT){0,1}' pom.xml | sed 's/.adb.version>/ /g ' | sort  | sed 's/composant-applicatif-/ ╞──/g ')"
                 if [ $(echo "$res" | sed '/^\s*$/d' | wc -l) -gt 0 ] ;
                 then
                     echo "$res" | grep --color -E '[0-9]{2,3}(\-.*|$)'
-                    echo " └─────────────────────────────────────────────"
+                    echo " ╘─────────────────────────────────────────────"
                 fi
             fi
             cd ../
@@ -65,14 +65,14 @@ then
 		            let "updated = $updated + 1"
                     correspondingVersion=`echo "$correspondingProject" | grep -Eo '0[0-9]{1}_[0-9]{2}_[0-9]{2}\.[0-9]{2,3}(\-SNAPSHOT){0,1}'`
                     sed -i -e "s@<$dependency\.adb\.version>.*</$dependency\.adb\.version>@<$dependency.adb.version>${correspondingVersion}<\\/$dependency.adb.version>@g" $chem
-                    echo "  $(tput setaf 2)├──$(tput sgr 0) $depName updated to $(tput setaf 2)$correspondingVersion$(tput sgr 0)"
+                    echo "  $(tput setaf 2)╞──$(tput sgr 0) $depName updated to $(tput setaf 2)$correspondingVersion$(tput sgr 0)"
                 else
 		            let "errors = $errors + 1"
-                    echo "  $(tput setaf 1)├──$(tput sgr 0) $depName not updated"
+                    echo "  $(tput setaf 1)╞──$(tput sgr 0) $depName not updated"
                 fi
             done
             echo "  │"
-            echo "  └───────$(tput setaf 2)Updated( $updated )$(tput sgr 0)──────$(tput setaf 3)Warnings( $errors )$(tput sgr 0)───────"
+            echo "  ╘───────$(tput setaf 2)Updated( $updated )$(tput sgr 0)──────$(tput setaf 3)Warnings( $errors )$(tput sgr 0)───────"
         fi
     done
     rm -rf $tempFile

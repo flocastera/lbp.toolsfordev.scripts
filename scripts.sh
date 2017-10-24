@@ -35,6 +35,17 @@ then
     elif [ "$1" == "pom" ] || [ "$1" == "po" ] ;
     then
         $SCRIPTS_PATH/pom.sh $2 $3 $4 $5 $6
+    elif [ "$1" == "grep" ] || [ "$1" == "grp" ] ;
+    then
+        if [ "$2" == "--count" ] || [ "$2" == "-c" ] ;
+        then
+            $SCRIPTS_PATH/grep.sh --count $3 $4 $5 $6
+        elif [ "$2" == "--count-only" ] || [ "$2" == "-co" ] ;
+        then
+            $SCRIPTS_PATH/grep.sh --count-only $3 $4 $5 $6
+        else
+            $SCRIPTS_PATH/grep.sh --matches $2 $3 $4 $5 $6
+        fi
     elif [ "$1" == "--help" ] || [ "$1" == "-h" ] ;
     then
         echo
@@ -63,6 +74,7 @@ then
         echo " - $(tput setaf 2)state/st$(tput sgr 0)     => do a ping on specified IP, or service name (ex: couchbase)"
         echo " - $(tput setaf 2)pom$(tput sgr 0)          => show pom version for all components/modules (-f/--full to also print dependencies)"
         echo " - $(tput setaf 2)npm$(tput sgr 0)          => execute npm commands for all components"
+        echo " - $(tput setaf 2)grep$(tput sgr 0)         => execute grep (--count/--count-only to count and show / count) ex: lbp grep -co 'search' -E"
     else
         echo
         echo "$(tput setaf 1)Invalid arguments sent : $1$(tput sgr 0)"

@@ -40,7 +40,7 @@ do
         # Display and total calculation
 		if [ "$total" != "0" ] ;
 		then
-            echo "[$(tput setaf 1)x$(tput sgr 0)]──$(echo $projectPath | grep -Eo "(H[0-9]{2}\-)?[a-zA-Z]*$")"
+            echo "[$(tput setaf 1)x$(tput sgr 0)]──$(echo $projectPath | grep -Eo "$projectNamePatterns"))"
 
 		    let "totalFilesCount = $totalFilesCount + $total"
 
@@ -87,14 +87,14 @@ do
 	fi
 done
 
-echo -e "──┬─────────────────────────────────"
+echo -e "─┬────────────────────────────────────"
 if [ "$totalFilesCount" == "0" ] ;
 then
-    echo "  ╘────> $(tput setaf 2)Workspace is clean !$(tput sgr 0)"
+    echo " ╘────> $(tput setaf 2)Workspace is clean !$(tput sgr 0)"
 else
-    echo "  ╞────> $(tput setaf 2)Total$(tput sgr 0)    : $totalFilesCount"
-    echo "  ╞────> $(tput setaf 3)Added$(tput sgr 0)    : $addedFilesCount"
-    echo "  ╞────> $(tput setaf 3)Modified$(tput sgr 0) : $modifiedFilesCount"
-    echo "  ╞────> $(tput setaf 1)Deleted$(tput sgr 0)  : $deletedFilesCount"
-    echo "  ╘────> Merged   : $mergedFilesCount"
+    echo " ╞────> $(tput setaf 2)Total$(tput sgr 0)    : $totalFilesCount"
+    echo " ╞────> $(tput setaf 3)Added$(tput sgr 0)    : $addedFilesCount"
+    echo " ╞────> $(tput setaf 3)Modified$(tput sgr 0) : $modifiedFilesCount"
+    echo " ╞────> $(tput setaf 1)Deleted$(tput sgr 0)  : $deletedFilesCount"
+    echo " ╘────> Merged   : $mergedFilesCount"
 fi
