@@ -6,6 +6,10 @@ then
     echo
     echo "$(tput setaf 2)Getting POM version for all projects...$(tput sgr 0)"
     echo "─┬─────────────────────────────────────────"
+    if [ "$1" == "--full" ] || [ "$1" == "-f" ] ;
+    then
+        echo " ╞──$(tput setaf 2)Will print dependencies$(tput sgr 0)"
+    fi
     echo " │"
 
     for projectPath in `find $WSP_PATH -maxdepth 1 -type d`

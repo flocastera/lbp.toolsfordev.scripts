@@ -3,6 +3,7 @@
 defaultArgs="-nR --color=always $3 $4 $5"
 exludesPaths="--exclude-dir=\.(git|classpath|externalToolBuilders|project|settings) --exclude-dir=node_modules --exclude-dir=target --exclude=npm-debug.log"
 search=$2
+
 totalMatchCount=0
 totalMatchProject=0
 matchProjects=""
@@ -11,6 +12,8 @@ dumpfile="$WSP_PATH/grep_results.txt"
 echo
 echo "$(tput setaf 2)Executing 'grep' command in all projects...$(tput sgr 0)"
 echo "─┬─────────────────────────────────────────"
+echo " │"
+echo " ╞──Grep type : '$(tput setaf 2)$1$(tput sgr 0)'"
 echo " ╞──Search : '$(tput setaf 2)$search$(tput sgr 0)'"
 echo " ╞──Args : $defaultArgs"
 echo " ╞──Excluded : $(tput setaf 3)$exludesPaths$(tput sgr 0)"
