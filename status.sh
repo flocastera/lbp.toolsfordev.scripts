@@ -9,7 +9,8 @@ mergedFilesCount=0
 
 echo
 echo "$(tput setaf 2)Getting status for projects...$(tput sgr 0)"
-echo
+echo "─┬────────────────────────────"
+echo " │"
 # Looping over directories in Workspace path
 for projectPath in `find $WSP_PATH -maxdepth 1 -type d`
 do
@@ -40,7 +41,7 @@ do
         # Display and total calculation
 		if [ "$total" != "0" ] ;
 		then
-            echo "[$(tput setaf 1)x$(tput sgr 0)]──$(echo $projectPath | grep -Eo "$projectNamePatterns"))"
+            echo "[$(tput setaf 1)x$(tput sgr 0)]──$(echo $projectPath | grep -Eo "$projectNamePatterns")"
 
 		    let "totalFilesCount = $totalFilesCount + $total"
 
@@ -79,7 +80,6 @@ do
                 echo "$(tput setaf 3)`echo "$resultUnknown" | sed "s/^/ ╞──/g "`$(tput sgr 0)"
 		        let "mergedFilesCount = $mergedFilesCount + `echo "$resultUnknown" | wc -l`"
             fi
-            echo " ╘────────────────────────────────────────"
 		else
 		    # Displaying message if nothing change in folder (supports excluded files)
             echo "[$(tput setaf 2)V$(tput sgr 0)] No changes in $(echo $projectPath | grep -Eo "(H[0-9]{2}\-)?[a-zA-Z]*$")"
@@ -87,14 +87,16 @@ do
 	fi
 done
 
-echo -e "─┬────────────────────────────────────"
+echo " │"
+echo -e "─╪────────────────────────────"
 if [ "$totalFilesCount" == "0" ] ;
 then
-    echo " ╘────> $(tput setaf 2)Workspace is clean !$(tput sgr 0)"
+    echo " ╘─ $(tput setaf 2)Workspace is clean !$(tput sgr 0)"
 else
-    echo " ╞────> $(tput setaf 2)Total$(tput sgr 0)    : $totalFilesCount"
-    echo " ╞────> $(tput setaf 3)Added$(tput sgr 0)    : $addedFilesCount"
-    echo " ╞────> $(tput setaf 3)Modified$(tput sgr 0) : $modifiedFilesCount"
-    echo " ╞────> $(tput setaf 1)Deleted$(tput sgr 0)  : $deletedFilesCount"
-    echo " ╘────> Merged   : $mergedFilesCount"
+    echo " ╞─ $(tput setaf 2)Total$(tput sgr 0)    : $totalFilesCount"
+    echo " ╞─ $(tput setaf 3)Added$(tput sgr 0)    : $addedFilesCount"
+    echo " ╞─ $(tput setaf 3)Modified$(tput sgr 0) : $modifiedFilesCount"
+    echo " ╞─ $(tput setaf 1)Deleted$(tput sgr 0)  : $deletedFilesCount"
+    echo " ╞─ Merged   : $mergedFilesCount"
+    echo -e " ╘────────────────────────────"
 fi
