@@ -5,6 +5,7 @@ exludesPaths="--exclude-dir=\.(git|classpath|externalToolBuilders|project|settin
 search=$2
 totalMatchCount=0
 totalMatchProject=0
+matchProjects=""
 dumpfile="$WSP_PATH/grep_results.txt"
 
 echo
@@ -30,6 +31,7 @@ do
 	        echo "[$(tput setaf 2)V$(tput sgr 0)]──$(tput setaf 2)$projectName$(tput sgr 0)"
 		    let "totalMatchCount = $totalMatchCount + $count"
 		    let "totalMatchProject = $totalMatchProject + 1"
+		    matchProjects="$projectName, $matchProjects"
 
 		    if [ "$1" == "--count-only" ] ;
 		    then
@@ -54,8 +56,9 @@ do
 done
 echo " │"
 echo "─╪───────────────────────────────"
-echo " ╞─ Total match count      : $(tput setaf 2)$totalMatchCount$(tput sgr 0)"
-echo " ╞─ Total match project    : $(tput setaf 2)$totalMatchProject$(tput sgr 0)"
+echo " ╞─ Total match count     : $(tput setaf 2)$totalMatchCount$(tput sgr 0)"
+echo " ╞─ Total match project   : $(tput setaf 2)$totalMatchProject$(tput sgr 0)"
+echo " ╞─ Projects that matches : $(tput setaf 2)$matchProjects$(tput sgr 0)"
 echo " ╘───────────────────────────────"
 
 if [ "$1" == "--count" ] ;
