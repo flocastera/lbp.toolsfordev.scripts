@@ -77,7 +77,7 @@ do
 
             if [ "$resultUnknown" != "" ] ;
             then
-                echo "$(tput setaf 3)`echo "$resultUnklonnown" | sed "s/^/ ╞──/g "`$(tput sgr 0)"
+                echo "$(tput setaf 3)`echo "$resultUnknown" | sed "s/^/ ╞──/g "`$(tput sgr 0)"
 		        let "mergedFilesCount = $mergedFilesCount + `echo "$resultUnknown" | wc -l`"
             fi
 		else
