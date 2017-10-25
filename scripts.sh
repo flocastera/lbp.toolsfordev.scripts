@@ -32,6 +32,9 @@ then
     elif [ "$1" == "npm" ] || [ "$1" == "npm" ] ;
     then
         $SCRIPTS_PATH/npm.sh $2 $3 $4 $5 $6
+    elif [ "$1" == "grunt" ] || [ "$1" == "grt" ] ;
+    then
+        $SCRIPTS_PATH/grunt.sh $2 $3 $4 $5 $6
     elif [ "$1" == "pom" ] || [ "$1" == "po" ] ;
     then
         $SCRIPTS_PATH/pom.sh $2 $3 $4 $5 $6
