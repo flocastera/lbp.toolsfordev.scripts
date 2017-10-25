@@ -82,7 +82,7 @@ do
             fi
 		else
 		    # Displaying message if nothing change in folder (supports excluded files)
-            echo "[$(tput setaf 2)V$(tput sgr 0)] No changes in $(echo $projectPath | grep -Eo "(H[0-9]{2}\-)?[a-zA-Z]*$")"
+            echo "[$(tput setaf 2)V$(tput sgr 0)]──No changes in $(echo $projectPath | grep -Eo "(H[0-9]{2}\-)?[a-zA-Z]*$")"
 		fi
 	fi
 done
