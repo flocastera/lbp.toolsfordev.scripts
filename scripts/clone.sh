@@ -1,6 +1,6 @@
 #!/bin/bash
 
-repositoriesListFile="$WSP_PATH/repositories.txt"
+repositoriesListFile="$repositoriesList"
 
 localProjects=`find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns"`
 localProjectsName=`echo "$localProjects" | sed -e "s@$WSP_PATH/@@g"`
