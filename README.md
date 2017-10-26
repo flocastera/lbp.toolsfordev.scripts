@@ -41,6 +41,6 @@ peuvent être exclus dans le [fichier configuration.sh](configuration.sh), varia
 2. Créer une variable d'environnement $WSP_PATH ciblant la racine de votre workspace
 3. Créer un alias permettant d'accéder au script de lancement '[scripts.sh](script.sh)'
 * Exemple : alias lbpscripts="D:/workspaceJDK8/lbp.toolsfordev.scripts/scripts.sh"
-4. Vérifier la validité des variables dans le fichier de configuration [configuration.sh](configuration.sh)
+4. Vérifier la validité des variables dans le fichier de configuration ['configuration.sh'](configuration.sh)
 5. Si la variable d'environnement a bien été valorisé et l'alias également, le programme peut être appelé depuis n'importe
 quel emplacement
