@@ -31,7 +31,7 @@ do
 
 	        echo "[$(tput setaf 2)V$(tput sgr 0)]──$(tput setaf 2)$projectName$(tput sgr 0)"
             echo " │"
-            if [ `echo "$tasks" | grep "(eslint|jshint)?" -ciE` != "0" ] ;
+            if [ `echo "$@" | grep "(--detail)+" -ciE` != "0" ] ;
             then
                 echo "$resp" | sed "s/^/ ╞───/g" | sed "/^ ╞───$/d"
             else
