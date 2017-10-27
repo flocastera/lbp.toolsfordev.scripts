@@ -11,6 +11,8 @@ echo
 echo "$(tput setaf 2)Getting status for projects...$(tput sgr 0)"
 echo "─┬────────────────────────────"
 echo " │"
+echo " ╞──New userId : '$(tput setaf 2)$userId$(tput sgr 0)'"
+echo " │"
 # Looping over directories in Workspace path
 for projectPath in `find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns"`
 do

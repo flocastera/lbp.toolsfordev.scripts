@@ -26,7 +26,7 @@ do
 	then
 		cd $projectPath
 		result=`grep $defaultArgs $exludesPaths $search`
-		let "count=`echo "$result" | wc -l` - 1"
+		let "count=`echo "$result" | sed '/^\s*$/d' | wc -l`"
 		projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
 
         if [ $count -gt 0 ] ;
