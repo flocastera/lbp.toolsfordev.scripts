@@ -40,6 +40,12 @@ l'option correspondante. La statégie de merge peut être définie également de
 Affiche le statut de tous les projets contenant un .git. Ce statut peut être détaillée ou non, et certains fichiers 
 peuvent être exclus dans le [fichier configuration.sh](configuration.sh), variable 'excludedProjectPathsPatterns'
 * -h : masque les fichiers exlus de l'affichage du statut
+##### userId (uid)
+Permet de modifier la valeur de l'userId dans les fichiers '*/SecurityBouchonConfig.xml' des tous les projets
+
+__Attention :__ les fichiers 'target/*/SecurityBouchonConfig.xml' ne sont pas modifiés
+
+__Exemple :__ lbpscripts uid TCCA001
 
 ## Configuration optimale :
 1. Déposer/cloner ce projet à la racine de votre workspace (à coté des composants/modules)
