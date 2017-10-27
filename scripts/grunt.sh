@@ -19,6 +19,7 @@ do
     # Testing if directory pattern matches watched directories
     test=`find $projectPath -maxdepth 1 -name "Gruntfile.js" | sed '/^\s*$/d' | wc -l`
 	projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
+
 	if [ "$test" != "0" ] ;
 	then
 		cd $projectPath # Going into project folder to execute grunt commands
@@ -42,7 +43,7 @@ do
         then
 		    let "totalErrors = $totalErrors + 1"
 
-	        echo "[$(tput setaf 1)x$(tput sgr 0)]──$(tput setaf 2)$projectName$(tput sgr 0)"
+	        echo "[$(tput setaf 1)X$(tput sgr 0)]──$(tput setaf 2)$projectName$(tput sgr 0)"
             echo " │"
             echo "$resp" | sed "s/^/ ╞───/g" | sed "/^ ╞───$/d"
             echo " │"

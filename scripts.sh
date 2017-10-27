@@ -11,9 +11,9 @@ then
     elif [ "$1" == "clone" ] || [ "$1" == "gcl" ] ;
     then
         $SCRIPTS_PATH/clone.sh $2 $3 $4 $5 $6
-#    elif [ "$1" == "pull" ] || [ "$1" == "gpl" ] ;
-#    then
-#        $SCRIPTS_PATH/pull.sh $2 $3 $4 $5 $6
+    elif [ "$1" == "pull" ] || [ "$1" == "gpl" ] ;
+    then
+        $SCRIPTS_PATH/pull.sh $2 $3 $4 $5 $6
 #    elif [ "$1" == "reset" ] || [ "$1" == "grs" ] ;
 #    then
 #        $SCRIPTS_PATH/reset.sh $2 $3 $4 $5 $6

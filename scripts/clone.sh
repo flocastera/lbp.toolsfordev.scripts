@@ -36,7 +36,7 @@ do
 
     if [ `echo "$resp" | grep -ci "fatal"` -gt 0 ] ;
     then
-        echo "[$(tput setaf 1)x$(tput sgr 0)]──$(tput setaf 2)$repoName$(tput sgr 0)"
+        echo "[$(tput setaf 1)X$(tput sgr 0)]──$(tput setaf 2)$repoName$(tput sgr 0)"
 		let "totalErrors = $totalErrors + 1"
         if [ `echo "$resp" | grep -ci "remote: not found"` -gt 0 ] ;
         then

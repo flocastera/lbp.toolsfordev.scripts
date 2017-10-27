@@ -41,7 +41,7 @@ do
         # Display and total calculation
 		if [ "$total" != "0" ] ;
 		then
-            echo "[$(tput setaf 1)x$(tput sgr 0)]──$(echo $projectPath | grep -Eo "$projectNamePatterns")"
+            echo "[$(tput setaf 1)X$(tput sgr 0)]──$(echo $projectPath | grep -Eo "$projectNamePatterns")"
 
 		    let "totalFilesCount = $totalFilesCount + $total"
 
