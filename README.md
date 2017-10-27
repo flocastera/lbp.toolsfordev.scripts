@@ -31,6 +31,11 @@ Affiche la version du pom de chaque projet (si un pom est présent). Peut égale
 dépendances, et ainsi les synchroniser si elles sont tirées en local.
 * -f/--full : affiche la version des dépendances
 * -s/--sync : permets de synchroniser les versions des dépendances
+##### pull (gpl)
+Permet d'effectuer un pull sur tous les projets. Un stash peut être appliqué avant de manière automatique en utilisant 
+l'option correspondante. La statégie de merge peut être définie également depuis une option
+* --stash : éxécute 'git stash' avant de faire le 'git pull', puis éxécute un 'git stash pop' si tout s'est bien passé
+* --force : permet de spécifier une stratégie de merge, cett option est équivalente à faire un 'git pull -X theirs'
 ##### status (gst)
 Affiche le statut de tous les projets contenant un .git. Ce statut peut être détaillée ou non, et certains fichiers 
 peuvent être exclus dans le [fichier configuration.sh](configuration.sh), variable 'excludedProjectPathsPatterns'
