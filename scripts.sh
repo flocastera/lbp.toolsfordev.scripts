@@ -65,7 +65,7 @@ then
         echo "$(tput setaf 3)GIT :$(tput sgr 0)"
         echo " - $(tput setaf 2)clone/gcl$(tput sgr 0)    => clone every repositories inserted in repositories.txt"
         echo " - $(tput setaf 2)status/gst$(tput sgr 0)   => show Git status for all components/modules (with -s option)"
-#        echo " - $(tput setaf 2)pull/gpl$(tput sgr 0)     => do a Git pull for all components/modules"
+        echo " - $(tput setaf 2)pull/gpl$(tput sgr 0)     => do a Git pull for all components/modules"
 #        echo " - $(tput setaf 2)reset/grs$(tput sgr 0)    => do a Git reset for all components/modules (with --hard option)"
 #        echo " - $(tput setaf 2)checkout/gbr$(tput sgr 0) => do a Git checkout to specified branch for all components/modules"
 #        echo " - $(tput setaf 2)stash/gsta$(tput sgr 0)   => do a Git stash for all components/modules (can add 'pop')"
