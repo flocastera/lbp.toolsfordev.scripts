@@ -8,7 +8,7 @@ file=""
 userId="$1"
 
 echo
-echo "$(tput setaf 2)Getting status for projects...$(tput sgr 0)"
+echo "$(tput setaf 2)Setting UserId for projects...$(tput sgr 0)"
 echo "─┬────────────────────────────"
 echo " │"
 echo " ╞──New userId : '$(tput setaf 2)$userId$(tput sgr 0)'"
@@ -16,7 +16,7 @@ echo " │"
 # Looping over directories in Workspace path
 for projectPath in `find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns"`
 do
-    cd $projectPath # Going into project folder to execute Git commands
+    cd $projectPath # Going into project folder to execute commands
     projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
 
     files=`find $projectPath -name "SecurityBouchonConfig.xml" | sed -e '/^.*\\/target\\/.*/d'`
@@ -28,7 +28,7 @@ do
         for file in $files
         do
             # File exists
-            sed -ie "s@<property name=\"userId\" value=\".*\"[ ]*\\/>@<property name=\"userId\" value=\"$userId\" \\/>@g" $file
+            sed -i -e "s@<property name=\"userId\" value=\".*\"[ ]*\\/>@<property name=\"userId\" value=\"$userId\" \\/>@g" $file
             result=`grep -Ec "<property name=\"userId\" value=\"$userId\"(\s)*/>" $file`
             minFile=`echo "$file" | sed -e "s@$projectPath@@g"`
 

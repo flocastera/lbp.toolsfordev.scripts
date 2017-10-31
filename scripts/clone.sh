@@ -14,8 +14,11 @@ echo
 echo "$(tput setaf 2)Cloning projects in $(tput sgr 0)$repositoriesListFile$(tput setaf 2) from depositories...$(tput sgr 0)"
 echo "─┬────────────────────────────"
 echo " │"
+repos=`cat $repositoriesListFile | grep -Ev "^(\s)*\-\-" | grep -vE "^$"`
+echo " ╞──$(tput setaf 2)`echo "$repos" | sed '/^\s*$/d' | wc -l`$(tput sgr 0) dépots trouvés dans la liste (après filtrage)"
+echo " │"
 
-for repo in `cat $repositoriesListFile`
+for repo in $repos
 do
     repoName=`echo "$repo" | sed -e "s@^.*/@@g" | sed -e "s@\\.git\\$@@g"`
     exists=`echo "$localProjectsName" | grep "$repoName" -c`
