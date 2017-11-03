@@ -26,9 +26,9 @@ then
 #    elif [ "$1" == "pop" ] || [ "$1" == "gstp" ] ;
 #    then
 #        $SCRIPTS_PATH/stash.sh pop $2 $3 $4 $5 $6
-#    elif [ "$1" == "npm" ] || [ "$1" == "npm" ] ;
-#    then
-#        $SCRIPTS_PATH/npm.sh $2 $3 $4 $5 $6
+    elif [ "$1" == "clean" ] || [ "$1" == "cle" ] ;
+    then
+        $SCRIPTS_PATH/clean.sh $2 $3 $4 $5 $6
     elif [ "$1" == "grunt" ] || [ "$1" == "grt" ] ;
     then
         $SCRIPTS_PATH/grunt.sh $2 $3 $4 $5 $6
@@ -76,6 +76,7 @@ then
         echo " - $(tput setaf 2)grep$(tput sgr 0)/grp     => execute grep commmands in all project"
         echo " - $(tput setaf 2)grunt$(tput sgr 0)/grt    => execute grunt tasks given in parameters "
         echo " - $(tput setaf 2)userId$(tput sgr 0)/uid   => modify userId in SecurityBouchonConfig.xml"
+        echo " - $(tput setaf 2)clean$(tput sgr 0)/cle    => clean projects files (.bak, .log, ...)"
     else
         echo
         echo "$(tput setaf 1)Invalid arguments sent : $1$(tput sgr 0)"

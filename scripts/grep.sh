@@ -19,43 +19,39 @@ echo " ╞──Args : $defaultArgs"
 echo " ╞──Excluded : $(tput setaf 3)$exludesPaths$(tput sgr 0)"
 echo " │"
 
-for projectPath in `find $WSP_PATH -maxdepth 1 -type d`
+for projectPath in `find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns"`
 do
-	test="$(echo $projectPath | grep -E "$watchPatterns" -c)"
-	if [ $test -eq 1  ];
-	then
-		cd $projectPath
-		result=`grep $defaultArgs $exludesPaths $search`
-		let "count=`echo "$result" | sed '/^\s*$/d' | wc -l`"
-		projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
+    cd $projectPath
+    result=`grep $defaultArgs $exludesPaths $search`
+    let "count=`echo "$result" | sed '/^\s*$/d' | wc -l`"
+    projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
 
-        if [ $count -gt 0 ] ;
+    if [ $count -gt 0 ] ;
+    then
+        echo "[$(tput setaf 2)V$(tput sgr 0)]──$(tput setaf 2)$projectName$(tput sgr 0)"
+        let "totalMatchCount = $totalMatchCount + $count"
+        let "totalMatchProject = $totalMatchProject + 1"
+        matchProjects="$projectName, $matchProjects"
+
+        if [ "$1" == "--count-only" ] ;
         then
-	        echo "[$(tput setaf 2)V$(tput sgr 0)]──$(tput setaf 2)$projectName$(tput sgr 0)"
-		    let "totalMatchCount = $totalMatchCount + $count"
-		    let "totalMatchProject = $totalMatchProject + 1"
-		    matchProjects="$projectName, $matchProjects"
-
-		    if [ "$1" == "--count-only" ] ;
-		    then
-                echo " ╞───Matches : $count"
-            elif [ "$1" == "--count" ] ;
-            then
-                echo " ╞───Matches : $count"
-                echo "" >> $dumpfile
-                echo "===================[ $projectName ]===================" >> $dumpfile
-                echo "" >> $dumpfile
-                grep $defaultArgs $exludesPaths $search >> $dumpfile
-                echo "" >> $dumpfile
-            elif [ "$1" == "--matches" ] ;
-            then
-                grep $defaultArgs $exludesPaths $search | sed 's/^/ ╞───/g'
-                echo " ╞───Matches : $count"
-		    fi
-		else
-	        echo "[$(tput setaf 1)X$(tput sgr 0)] No results in $(tput setaf 2)$(echo $projectPath | grep -Eo "$projectNamePatterns")$(tput sgr 0)"
+            echo " ╞───Matches : $count"
+        elif [ "$1" == "--count" ] ;
+        then
+            echo " ╞───Matches : $count"
+            echo "" >> $dumpfile
+            echo "===================[ $projectName ]===================" >> $dumpfile
+            echo "" >> $dumpfile
+            grep $defaultArgs $exludesPaths $search >> $dumpfile
+            echo "" >> $dumpfile
+        elif [ "$1" == "--matches" ] ;
+        then
+            grep $defaultArgs $exludesPaths $search | sed 's/^/ ╞───/g'
+            echo " ╞───Matches : $count"
         fi
-	fi
+    else
+        echo "[$(tput setaf 1)X$(tput sgr 0)] No results in $(tput setaf 2)$(echo $projectPath | grep -Eo "$projectNamePatterns")$(tput sgr 0)"
+    fi
 done
 echo " │"
 echo "─╪───────────────────────────────"

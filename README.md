@@ -41,17 +41,15 @@ Affiche le statut de tous les projets contenant un .git. Ce statut peut être d�
 peuvent être exclus dans le [fichier configuration.sh](configuration.sh), variable 'excludedProjectPathsPatterns'
 * -h : masque les fichiers exlus de l'affichage du statut
 ##### userId (uid)
-Permet de modifier la valeur de l'userId dans les fichiers '*/SecurityBouchonConfig.xml' des tous les projets
+Permet de modifier la valeur de l'userId dans les fichiers de configuration XML de tous les projets
 
-__Attention :__ les fichiers 'target/*/SecurityBouchonConfig.xml' ne sont pas modifiés
-
-__Exemple :__ lbpscripts uid TCCA001
+__Exemple :__ aliasDuScript uid <UserId>
 
 ## Configuration optimale :
 1. Déposer/cloner ce projet à la racine de votre workspace (à coté des composants/modules)
 2. Créer une variable d'environnement $WSP_PATH ciblant la racine de votre workspace
 3. Créer un alias permettant d'accéder au script de lancement '[scripts.sh](script.sh)'
-* Exemple : alias lbpscripts="D:/workspaceJDK8/lbp.toolsfordev.scripts/scripts.sh"
+* Exemple : alias lbpscripts="C:/votre/chemin/de/workspace/lbp.toolsfordev.scripts/scripts.sh"
 4. Vérifier la validité des variables dans le fichier de configuration '[configuration.sh](configuration.sh)'
 5. Si la variable d'environnement a bien été valorisé et l'alias également, le programme peut être appelé depuis n'importe
 quel emplacement

@@ -19,7 +19,7 @@ do
     cd $projectPath # Going into project folder to execute commands
     projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
 
-    files=`find $projectPath -name "SecurityBouchonConfig.xml" | sed -e '/^.*\\/target\\/.*/d'`
+    files=`find $projectPath -name "SecurityBouchonConfig.xml"`
 
     if [ "$files" != "" ] ;
     then
