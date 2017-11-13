@@ -14,11 +14,15 @@ emplacementProjet/scripts.sh <nomScript> [parametres]
 ```
 
 ## Scripts disponibles :
+##### clean (cle)
+Nettoie les projets des fichiers indésirables pour éviter de les commiter. Par exemple, les logs, les résidus de merge ou de conflits tels que les .orig et .bak, etc.
 ##### clone (gcl) 
 Clone tous les répertoires présents dans le fichier repositories.txt, situé à la racine du workspace.
 L'emplacement et le nom de ce fichier peuvent être modifiés dans le [fichier configuration.sh](configuration.sh),
 variable 'repositoriesList'.
 * --force : remplace les projets existants (effectue une suppression du dossier puis un clone)
+##### command (cmd)
+Script générique permettant d'éxécuter le ou la commande dans tous les projets du workspace. 
 ##### grep (grp)
 Exécute une commande grep dans tous les répertoires du workspace. Possibilité de juste compter les occurences, d'afficher les occurences, ou de compter les occurences puis de les afficher à la fin du traitement
 * --count : permet de compter les occurences (uniquement)
@@ -26,6 +30,8 @@ Exécute une commande grep dans tous les répertoires du workspace. Possibilité
 ##### grunt (grt)
 Exécute des tâches Grunt (présentes dans le fichier Gruntfile.js) à la racine des projets (les projets n'en contenant pas seront ignorés)
 * --detail : affiche la sortie standard et d'erreur de grunt (si pas renseigné, affiche un message annoncant si les tâches ont réussi ou non)
+##### npm (np)
+Permet de lancer des commandes npm dans tous les projets
 ##### pom (po)
 Affiche la version du pom de chaque projet (si un pom est présent). Peut également afficher la version des
 dépendances, et ainsi les synchroniser si elles sont tirées en local.
