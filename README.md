@@ -22,7 +22,7 @@ L'emplacement et le nom de ce fichier peuvent être modifiés dans le [fichier c
 variable 'repositoriesList'.
 * --force : remplace les projets existants (effectue une suppression du dossier puis un clone)
 ##### command (cmd)
-Script générique permettant d'éxécuter le ou la commande dans tous les projets du workspace. 
+Script générique permettant d'éxécuter la ou les commande(s) dans tous les projets du workspace. 
 ##### grep (grp)
 Exécute une commande grep dans tous les répertoires du workspace. Possibilité de juste compter les occurences, d'afficher les occurences, ou de compter les occurences puis de les afficher à la fin du traitement
 * --count : permet de compter les occurences (uniquement)
