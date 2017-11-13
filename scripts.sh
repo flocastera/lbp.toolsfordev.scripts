@@ -62,7 +62,7 @@ then
         echo "$(tput setaf 3)GIT :$(tput sgr 0)"
         echo " - $(tput setaf 2)clone$(tput sgr 0)/gcl    => clone every repositories from configuration file (-f)"
         echo " - $(tput setaf 2)status$(tput sgr 0)/gst   => show Git status for all components/modules (-h)"
-        echo " - $(tput setaf 2)pull$(tput sgr 0)/gpl     => do a Git pull for all components/modules (--stash; --force)"
+        echo " - $(tput setaf 2)pull$(tput sgr 0)/gpl     => do a Git pull for all components/modules (--stash)"
         echo "$(tput setaf 3)OTHER :$(tput sgr 0)"
         echo " - $(tput setaf 2)command$(tput sgr 0)/cmd  => show pom version for all components/modules (-f; -s)"
         echo " - $(tput setaf 2)pom$(tput sgr 0)/po       => show pom version for all components/modules (-f; -s)"

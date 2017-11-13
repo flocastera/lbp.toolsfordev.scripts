@@ -53,13 +53,6 @@ do
         fi
     fi
 
-    if [ `echo "$@" | grep -Eci "(--force)+"` -gt 0 ] ;
-    then
-        # Preparing pull arguments
-        pullArgs=`echo "$pullArgs" | sed 's/--force//g'`
-        pullArgs="$pullArgs -X theirs"
-    fi
-
     # Do the pull
     resultPull=`git pull $pullArgs 2>&1`
 
