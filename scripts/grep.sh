@@ -36,9 +36,11 @@ do
         if [ "$1" == "--count-only" ] ;
         then
             echo " ╞───Matches : $count"
+            echo " │"
         elif [ "$1" == "--count" ] ;
         then
             echo " ╞───Matches : $count"
+            echo " │"
             echo "" >> $dumpfile
             echo "===================[ $projectName ]===================" >> $dumpfile
             echo "" >> $dumpfile
@@ -48,6 +50,7 @@ do
         then
             grep $defaultArgs $exludesPaths $search | sed 's/^/ ╞───/g'
             echo " ╞───Matches : $count"
+            echo " │"
         fi
     else
         echo "[$(tput setaf 1)X$(tput sgr 0)] No results in $(tput setaf 2)$(echo $projectPath | grep -Eo "$projectNamePatterns")$(tput sgr 0)"

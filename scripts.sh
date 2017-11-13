@@ -14,24 +14,21 @@ then
     elif [ "$1" == "pull" ] || [ "$1" == "gpl" ] ;
     then
         $SCRIPTS_PATH/pull.sh $2 $3 $4 $5 $6
-#    elif [ "$1" == "reset" ] || [ "$1" == "grs" ] ;
-#    then
-#        $SCRIPTS_PATH/reset.sh $2 $3 $4 $5 $6
-#    elif [ "$1" == "checkout" ] || [ "$1" == "gbr" ] ;
-#    then
-#        $SCRIPTS_PATH/checkout.sh $2 $3 $4 $5 $6
+    elif [ "$1" == "command" ] || [ "$1" == "cmd" ] ;
+    then
+        $SCRIPTS_PATH/command.sh $2 $3 $4 $5 $6
     elif [ "$1" == "userId" ] || [ "$1" == "uid" ] ;
     then
         $SCRIPTS_PATH/uid.sh $2 $3 $4 $5 $6
-#    elif [ "$1" == "pop" ] || [ "$1" == "gstp" ] ;
-#    then
-#        $SCRIPTS_PATH/stash.sh pop $2 $3 $4 $5 $6
-    elif [ "$1" == "clean" ] || [ "$1" == "cle" ] ;
+    elif [ "$1" == "clean" ] || [ "$1" == "cl" ] ;
     then
         $SCRIPTS_PATH/clean.sh $2 $3 $4 $5 $6
     elif [ "$1" == "grunt" ] || [ "$1" == "grt" ] ;
     then
         $SCRIPTS_PATH/grunt.sh $2 $3 $4 $5 $6
+    elif [ "$1" == "npm" ] || [ "$1" == "np" ] ;
+    then
+        $SCRIPTS_PATH/npm.sh $2 $3 $4 $5 $6
     elif [ "$1" == "pom" ] || [ "$1" == "po" ] ;
     then
         $SCRIPTS_PATH/pom.sh $2 $3 $4 $5 $6
@@ -63,20 +60,19 @@ then
         echo
         echo "AVAILABLE COMMANDS :"
         echo "$(tput setaf 3)GIT :$(tput sgr 0)"
-        echo " - $(tput setaf 2)clone$(tput sgr 0)/gcl    => clone every repositories from configuration file"
-        echo " - $(tput setaf 2)status$(tput sgr 0)/gst   => show Git status for all components/modules"
-        echo " - $(tput setaf 2)pull$(tput sgr 0)/gpl     => do a Git pull for all components/modules"
-#        echo " - $(tput setaf 2)reset/grs$(tput sgr 0)    => do a Git reset for all components/modules (with --hard option)"
-#        echo " - $(tput setaf 2)checkout/gbr$(tput sgr 0) => do a Git checkout to specified branch for all components/modules"
-#        echo " - $(tput setaf 2)stash/gsta$(tput sgr 0)   => do a Git stash for all components/modules (can add 'pop')"
-#        echo " - $(tput setaf 2)pop/gstp$(tput sgr 0)     => do a Git stash pop for all components/modules (equivalent to 'gsta pop')"
+        echo " - $(tput setaf 2)clone$(tput sgr 0)/gcl    => clone every repositories from configuration file (-f)"
+        echo " - $(tput setaf 2)status$(tput sgr 0)/gst   => show Git status for all components/modules (-h)"
+        echo " - $(tput setaf 2)pull$(tput sgr 0)/gpl     => do a Git pull for all components/modules (--stash; --force)"
         echo "$(tput setaf 3)OTHER :$(tput sgr 0)"
-        echo " - $(tput setaf 2)pom$(tput sgr 0)/po       => show pom version for all components/modules"
-#        echo " - $(tput setaf 2)npm$(tput sgr 0)          => execute npm commands for all components"
-        echo " - $(tput setaf 2)grep$(tput sgr 0)/grp     => execute grep commmands in all project"
-        echo " - $(tput setaf 2)grunt$(tput sgr 0)/grt    => execute grunt tasks given in parameters "
+        echo " - $(tput setaf 2)command$(tput sgr 0)/cmd  => show pom version for all components/modules (-f; -s)"
+        echo " - $(tput setaf 2)pom$(tput sgr 0)/po       => show pom version for all components/modules (-f; -s)"
+        echo " - $(tput setaf 2)grep$(tput sgr 0)/grp     => execute grep commmands in all project (-c; -co)"
+        echo " - $(tput setaf 2)npm$(tput sgr 0)/np       => execute grunt tasks given in parameters (-d)"
+        echo " - $(tput setaf 2)grunt$(tput sgr 0)/grt    => execute grunt tasks given in parameters (-d)"
         echo " - $(tput setaf 2)userId$(tput sgr 0)/uid   => modify userId in SecurityBouchonConfig.xml"
-        echo " - $(tput setaf 2)clean$(tput sgr 0)/cle    => clean projects files (.bak, .log, ...)"
+        echo " - $(tput setaf 2)clean$(tput sgr 0)/cl     => clean projects files (.bak, .log, ...) (-d)"
+        echo
+        echo "More informations: https://github.com/flocastera/lbp.toolsfordev.scripts"
     else
         echo
         echo "$(tput setaf 1)Invalid arguments sent : $1$(tput sgr 0)"

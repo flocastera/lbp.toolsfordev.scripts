@@ -1,6 +1,6 @@
 #!/bin/bash
 
-filesToDelete="(*.\log$|*\.bak$|*\.xmle)+"
+filesToDelete="(*\.log$|*\.bak$|*\.orig$|*\.xmle)+"
 exludedPaths="(*\.git|*node_modules*)"
 
 totalDeleted=0
