@@ -26,11 +26,15 @@ then
     elif [ "$1" == "grunt" ] || [ "$1" == "grt" ] ;
     then
         $SCRIPTS_PATH/grunt.sh $2 $3 $4 $5 $6
+    elif [ "$1" == "watch" ] || [ "$1" == "wat" ] ;
+    then
+        $SCRIPTS_PATH/watch.sh $2 $3 $4 $5 $6
     elif [ "$1" == "npm" ] || [ "$1" == "np" ] ;
     then
         $SCRIPTS_PATH/npm.sh $2 $3 $4 $5 $6
     elif [ "$1" == "pom" ] || [ "$1" == "po" ] ;
     then
+#        scriptToUse="pom"
         $SCRIPTS_PATH/pom.sh $2 $3 $4 $5 $6
     elif [ "$1" == "grep" ] || [ "$1" == "grp" ] ;
     then

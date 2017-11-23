@@ -1,50 +1,54 @@
 #!/bin/bash
 
+
+. $WSP_PATH/lbp.toolsfordev.scripts/functions.sh
 path="$(pwd)"
-if [ "$#" == "0" ] || [ "$1" == "--full" ] || [ "$1" == "-f" ] ;
+args=$@
+
+hasArgument $args "full;f"
+if [ $? -eq 1 ] || [ "$args" == "0" ] ;
 then
-    echo
-    echo "$(tput setaf 2)Getting POM version for all projects...$(tput sgr 0)"
-    echo "─┬─────────────────────────────────────────"
-    if [ "$1" == "--full" ] || [ "$1" == "-f" ] ;
+    printTitle "Getting POM version for all projects"
+
+    hasArgument $args "full;f"
+    if [ $? -eq 1 ] ;
     then
-        echo " ╞──$(tput setaf 2)Will print dependencies$(tput sgr 0)"
+        printInfo "$(tput setaf 2)Will print dependencies$(tput sgr 0)"
     fi
-    echo " │"
+    printLine
 
-    for projectPath in `find $WSP_PATH -maxdepth 1 -type d`
+    for projectPath in `find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns"`
     do
-        test="$(echo $projectPath | grep -E "$watchPatterns" -c)"
-        if [ $test -eq 1 ]
+        cd $projectPath
+        projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
+
+        res="$(grep -E "<version>.*</version>" pom.xml -m 2 | tail -1)"
+        res=${res:11}
+        res="$(echo $res | sed 's/.\{10\}$//')"
+
+        printProjectInfo $projectName "valid" `echo "$res" | grep --color=always -E "[0-9]{2,3}\-.*"`
+
+        hasArgument $args "full;f"
+        if [ $? -eq 1 ] ;
         then
-            cd $projectPath
-		    projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
-
-            echo -n "[$(tput setaf 2)V$(tput sgr 0)]──$(tput setaf 2)$projectName$(tput sgr 0) : "
-
-            res="$(grep -E "<version>.*</version>" pom.xml -m 2 | tail -1)"
-            res=${res:11}
-            res="$(echo $res | sed 's/.\{10\}$//')"
-            echo $res | grep --color -E "[0-9]{2,3}\-.*"
-            if [ "$1" == "--full" ] || [ "$1" == "-f" ] ;
+            res="$(awk '/<properties>/,/<\/properties>/' pom.xml | grep -Eo '(composant\-applicatif|module)+\-[a-zA-Z0-9]+.*>0[0-9]{1}_[0-9]{2}_[0-9]{2}\.[0-9]{2,3}(\-SNAPSHOT){0,1}' pom.xml | sed 's/.adb.version>/ /g ' | sort  | sed 's/composant-applicatif-/ ╞───/g ')"
+            if [ $(echo "$res" | sed '/^\s*$/d' | wc -l) -gt 0 ] ;
             then
-                res="$(awk '/<properties>/,/<\/properties>/' pom.xml | grep -Eo '(composant\-applicatif|module)+\-[a-zA-Z0-9]+.*>0[0-9]{1}_[0-9]{2}_[0-9]{2}\.[0-9]{2,3}(\-SNAPSHOT){0,1}' pom.xml | sed 's/.adb.version>/ /g ' | sort  | sed 's/composant-applicatif-/ ╞───/g ')"
-                if [ $(echo "$res" | sed '/^\s*$/d' | wc -l) -gt 0 ] ;
-                then
-                    echo "$res" | grep --color -E '[0-9]{2,3}(\-.*|$)'
-                fi
+                echo "$res" | grep --color -E '[0-9]{2,3}(\-.*|$)'
             fi
-            echo " │"
         fi
+        printLine
     done
-    echo " ╘─────────────────────────────────────────────"
+    printEnd
 fi
-if [ "$1" == "--sync" ] || [ "$1" == "-s" ] ;
+
+
+hasArgument $args "sync;s"
+if [ $? -eq 1 ] ;
 then
-    echo
-    echo "$(tput setaf 2)Synchronizing POM dependencies version for all projects...$(tput sgr 0)"
-    echo "─┬─────────────────────────────────────────────────────"
-    echo " │"
+    printTitle "Synchronizing POM dependencies version for all projects"
+    printInfo "$(tput setaf 3)Ne pas utiliser Ctrl+C, ou alors supprimer le fichier tmpFile à la racine$(tput sgr 0)"
+    printLine
 
     projects=`find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns"`
     tempFile="$WSP_PATH/tmpFile"
@@ -62,9 +66,11 @@ then
         if [ $(echo "$dependencies" | sed '/^\s*$/d' | wc -l) -gt 0 ] ;
         then
             minProject=`echo $project | grep -Eo '[a-zA-Z0-9-]+$' | grep -Eo '(H[0-9]{2}\-)?[a-zA-Z]*$'`
-            echo "[$(tput setaf 2)V$(tput sgr 0)]──$(tput setaf 2)$minProject$(tput sgr 0)"
             updated=0
             errors=0
+
+            printProjectInfo "$minProject" "valid"
+
             for dependency in $dependencies
             do
                 minDep=`echo "$dependency" | awk '{print tolower($0)}'`
@@ -72,18 +78,20 @@ then
                 depName=`echo $dependency | grep -Eo '[a-zA-Z0-9-]+$' | grep -Eo '(H[0-9]{2}\-)?[a-zA-Z]*$'`
                 if [ $(echo "$correspondingProject" | sed '/^\s*$/d' | wc -l) -gt 0 ] ;
                 then
-		            let "updated = $updated + 1"
+		            let updated=$updated+1
                     correspondingVersion=`echo "$correspondingProject" | grep -Eo '0[0-9]{1}_[0-9]{2}_[0-9]{2}\.[0-9]{2,3}(\-SNAPSHOT){0,1}'`
                     sed -i -e "s@<$dependency\.adb\.version>.*</$dependency\.adb\.version>@<$dependency.adb.version>${correspondingVersion}<\\/$dependency.adb.version>@g" $chem
-                    echo " $(tput setaf 2)╞───$(tput sgr 0)$depName updated to $(tput setaf 2)$correspondingVersion$(tput sgr 0)"
+                    printProjectLine "$depName updated to $(tput setaf 2)$correspondingVersion$(tput sgr 0)" "valid"
+
                 else
-		            let "errors = $errors + 1"
-                    echo " $(tput setaf 3)╞───$(tput sgr 0)$depName not updated"
+		            let errors=$errors+1
+                    printProjectLine "$depName not updated" "nc"
                 fi
             done
-            echo " │"
+
+            printLine
         fi
     done
-    echo " ╘─────────────────────────────────────────────────────"
+    printEnd
     rm -rf $tempFile
 fi

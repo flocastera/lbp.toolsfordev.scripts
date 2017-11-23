@@ -7,6 +7,17 @@ echo "$(tput setaf 2)Executing grunt tasks for all projects...$(tput sgr 0)"
 echo "─┬────────────────────────────"
 echo " │"
 echo " ╞──Tasks : '$(tput setaf 2)$tasks$(tput sgr 0)'"
+
+echo `echo $tasks | grep "watch" -c`
+
+if [ `echo "$tasks" | grep "watch" -c` -gt 0 ] || [ -z ${tasks} ] ;
+then
+    echo " ╞──$(tput setaf 3)Attention!$(tput sgr 0) La tache 'watch' va bloquer l'exécution du script."
+    echo " ╞──Sortie du programme..."
+    echo " │"
+    echo " ╘────────────────────────────"
+    exit
+fi
 echo " │"
 
 totalErrors=0
@@ -33,6 +44,7 @@ do
 	        echo "[$(tput setaf 2)V$(tput sgr 0)]──$(tput setaf 2)$projectName$(tput sgr 0)"
             echo " │"
             if [ `echo "$@" | grep "(--detail)+" -ciE` != "0" ] ;
+#            if [ hasArgument $tasks "detail" ] ;
             then
                 echo "$resp" | sed "s/^/ ╞───/g" | sed "/^ ╞───$/d"
             else

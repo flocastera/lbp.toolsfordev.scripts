@@ -22,6 +22,9 @@ do
 	    projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
 
 	    branch=`git rev-parse --abbrev-ref HEAD`
+	    nullll=`git remote update 2>&1`
+	    statusToRemote=`git status -uno | grep -Eo -m 1 "(up\-to\-date|behind|ahead)+"`
+
 
 		result=`git status -s` # Getting general status for project
         resultModified=`echo "$result" | grep -E "^(\s)?M.*"`   # Getting modified files
@@ -44,7 +47,7 @@ do
         # Display and total calculation
 		if [ "$total" != "0" ] ;
 		then
-            echo "[$(tput setaf 1)X$(tput sgr 0)]──$projectName, on branch $(tput setaf 3)$branch $(tput sgr 0)"
+            echo "[$(tput setaf 1)X$(tput sgr 0)]──$projectName, on branch $(tput setaf 3)$branch $(tput sgr 0), $statusToRemote to 'origin'"
 
 		    let "totalFilesCount = $totalFilesCount + $total"
 
@@ -86,7 +89,7 @@ do
             echo " │"
 		else
 		    # Displaying message if nothing change in folder (supports excluded files)
-            echo "[$(tput setaf 2)V$(tput sgr 0)]──$projectName, on branch $(tput setaf 3)$branch $(tput sgr 0)"
+            echo "[$(tput setaf 2)V$(tput sgr 0)]──$projectName, on branch $(tput setaf 3)$branch $(tput sgr 0), $statusToRemote to 'origin'"
             echo " │"
 		fi
 	fi
