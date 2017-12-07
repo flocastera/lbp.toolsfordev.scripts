@@ -1,57 +1,75 @@
 #!/bin/bash
 
+################################
+# uid.sh
+# Appel : userId/uid
+# Description : Permet de modifier le code conseiller dans les fichiers SecurityBouchonConfig.xml
+# Args :
+#   --list/-l   : Permet d'afficher tous les codes conseillers sans les modifier
+################################
+
+. $WSP_PATH/lbp.toolsfordev.scripts/functions.sh
+
+args=`echo "$@" | grep -E -o "\-{1,2}[^($| )]+"`
+userId=`echo "$@" | grep -E -o "(^| )+[a-zA-Z0-9]+"`
+
+printHelp "$args" "uid.sh" "Modifie l'userId dans les SecurityBouchonConfig.xml" "userId/uid" "--list/-l=Permet d'afficher les valeurs plutôt que les modifier" "lbp uid 'TCCA001';lbp uid --list"
+
 path="$(pwd)"
 modifiedFilesCount=0
 ignoredFilesCount=0
 errorsFilesCount=0
 file=""
-userId="$1"
 
-echo
-echo "$(tput setaf 2)Setting UserId for projects...$(tput sgr 0)"
-echo "─┬────────────────────────────"
-echo " │"
-echo " ╞──New userId : '$(tput setaf 2)$userId$(tput sgr 0)'"
-echo " │"
-# Looping over directories in Workspace path
+printTitle "Setting UserId for projects"
+printInfo "Arguments : '$args'"
+printInfo "New userId : '$(tput setaf 2)$userId$(tput sgr 0)'"
+printLine
+
 for projectPath in `find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns"`
 do
-    cd $projectPath # Going into project folder to execute commands
+    cd $projectPath
     projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
 
     files=`find $projectPath -name "SecurityBouchonConfig.xml"`
 
     if [ "$files" != "" ] ;
     then
-        echo "[$(tput setaf 2)V$(tput sgr 0)]──$(tput setaf 2)$projectName$(tput sgr 0)"
+        printProjectInfo "$projectName" "valid"
 
         for file in $files
         do
-            # File exists
-            sed -i -e "s@<property name=\"userId\" value=\".*\"[ ]*\\/>@<property name=\"userId\" value=\"$userId\" \\/>@g" $file
-            result=`grep -Ec "<property name=\"userId\" value=\"$userId\"(\s)*/>" $file`
             minFile=`echo "$file" | sed -e "s@$projectPath@@g"`
-
-            if [ $result -gt 0 ] ;
+            hasArgument "$args" "list;l"
+            if [ $? -eq 1 ] ;
             then
-                echo " ╞───UserId successfully changed in $minFile"
-		        let "modifiedFilesCount = $modifiedFilesCount + 1"
+                resultSearch=`grep -E "<property name=\"userId\" value=\".*\"[ ]*\\/>" $file | grep -Eo "value=\".*\"" | grep -Eo "\".*\""`
+                printProjectLine "$minFile => $(tput setaf 2)$resultSearch$(tput sgr 0)"
             else
-                echo " $(tput setaf 3)╞───Unable to change userId in $minFile !$(tput sgr 0)"
-		        let "ignoredFilesCount = $ignoredFilesCount + 1"
+                sed -i -e "s@<property name=\"userId\" value=\".*\"[ ]*\\/>@<property name=\"userId\" value=\"$userId\" \\/>@g" $file
+                result=`grep -Ec "<property name=\"userId\" value=\"$userId\"(\s)*/>" $file`
+
+                if [ $result -gt 0 ] ;
+                then
+                    printProjectLine "UserId successfully changed in $minFile"
+                    let "modifiedFilesCount = $modifiedFilesCount + 1"
+                else
+                    printProjectLine "Unable to change userId in $minFile !$(tput sgr 0)"
+                    let "ignoredFilesCount = $ignoredFilesCount + 1"
+                fi
             fi
         done
-        echo " │"
+        printLine
     else
         let "errorsFilesCount = $errorsFilesCount + 1"
-        echo "[$(tput setaf 1)X$(tput sgr 0)]──$(tput setaf 2)$projectName$(tput sgr 0)"
-        echo " ╞───Pas de fichier 'SecurityBouchonConfig.xml' !"
-        echo " │"
+        printProjectInfo "$projectName" "nc"
+        printProjectLine "Pas de fichier 'SecurityBouchonConfig.xml' !"
+        printLine
     fi
 done
 
-echo "─╪────────────────────────────"
-echo " ╞─ $(tput setaf 2)Modified$(tput sgr 0) : $modifiedFilesCount"
-echo " ╞─ $(tput setaf 1)Errors$(tput sgr 0) : $errorsFilesCount"
-echo " ╞─ $(tput setaf 3)Ignored$(tput sgr 0) : $ignoredFilesCount"
-echo " ╘────────────────────────────"
+printResumeStart
+printResumeLine "Modified" "$modifiedFilesCount" "valid"
+printResumeLine "Errors" "$errorsFilesCount" "error"
+printResumeLine "Ignored" "$ignoredFilesCount" "nc"
+printEnd

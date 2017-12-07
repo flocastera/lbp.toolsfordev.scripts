@@ -11,7 +11,7 @@ totalErrors=0
 totalIgnored=0
 
 echo
-echo "$(tput setaf 2)Cloning projects in $(tput sgr 0)$repositoriesListFile$(tput setaf 2) from depositories...$(tput sgr 0)"
+echo "$(tput setaf 2)Cloning projects in $(tput sgr 0)$repositoriesListFile$(tput setaf 2) from repositories...$(tput sgr 0)"
 echo "─┬────────────────────────────"
 echo " │"
 repos=`cat $repositoriesListFile | grep -Ev "^(\s)*\-\-" | grep -vE "^$"`

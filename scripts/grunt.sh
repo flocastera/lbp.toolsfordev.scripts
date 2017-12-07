@@ -1,24 +1,38 @@
 #!/bin/bash
+################################
+# grunt.sh
+# Appel : grunt/grt
+# Description : Permet d'exécuter des tâches Grunt dans tous les projets (sauf watch)
+# Args :
+#   --all/-a    : Permet d'exécuter toutes les tâches communes (browserify et cssmin)
+#   --detail/-d : Affiche la sortie de grunt dans la console
+################################
 
-tasks=$@
+. $WSP_PATH/lbp.toolsfordev.scripts/functions.sh
+args=`echo "$@" | grep -E -o "\-{1,2}[^($| )]+"`
+tasks=`echo "$@" | grep -E -o "(^| )+[a-zA-Z]+"`
 
-echo
-echo "$(tput setaf 2)Executing grunt tasks for all projects...$(tput sgr 0)"
-echo "─┬────────────────────────────"
-echo " │"
-echo " ╞──Tasks : '$(tput setaf 2)$tasks$(tput sgr 0)'"
+printHelp "$args" "grunt.sh" "Exécute les tâches Grunt passées en paramètres et présentes dans le Gruntfile.js" "grunt/grt" "--all/-a=Exécute browserify et cssmin;--detail/-d=Affiche la sortie console de Grunt" "lbp grunt -ad;lbp grt cssmin --detail"
 
-echo `echo $tasks | grep "watch" -c`
-
-if [ `echo "$tasks" | grep "watch" -c` -gt 0 ] || [ -z ${tasks} ] ;
+hasArgument "$args" "all;a"
+if [ $? -eq 1 ] ;
 then
-    echo " ╞──$(tput setaf 3)Attention!$(tput sgr 0) La tache 'watch' va bloquer l'exécution du script."
-    echo " ╞──Sortie du programme..."
-    echo " │"
-    echo " ╘────────────────────────────"
+    tasks="browserify cssmin"
+fi
+
+printTitle "Executing grunt tasks for all projects"
+printInfo "Tasks : '$(tput setaf 2)$tasks$(tput sgr 0)'"
+printInfo "Arguments : '$args'"
+
+if [ `echo "$tasks" | grep "watch" -c` -gt 0 ] || [ -z "$tasks" ] ;
+then
+    printInfo "$(tput setaf 3)Attention!$(tput sgr 0) La tache 'watch' va bloquer l'exécution du script."
+    printInfo "Sortie du programme..."
+    printLine
+    printEnd
     exit
 fi
-echo " │"
+printLine
 
 totalErrors=0
 totalIgnored=0
@@ -41,35 +55,34 @@ do
         then
 		    let "totalSuccess = $totalSuccess + 1"
 
-	        echo "[$(tput setaf 2)V$(tput sgr 0)]──$(tput setaf 2)$projectName$(tput sgr 0)"
-            echo " │"
-            if [ `echo "$@" | grep "(--detail)+" -ciE` != "0" ] ;
-#            if [ hasArgument $tasks "detail" ] ;
+	        printProjectInfo "$projectName" "valid"
+            printLine
+
+            hasArgument "$args" "detail;d"
+            if [ $? -eq 1 ] ;
             then
                 echo "$resp" | sed "s/^/ ╞───/g" | sed "/^ ╞───$/d"
             else
-	            echo " ╞───Tâches effectuées avec succès"
+	            printProjectLine "Tâches effectuées avec succès" "valid"
             fi
-            echo " │"
+            printLine
         elif [ `echo "$resp" | grep "Aborted" -ci` != "0" ] ;
         then
 		    let "totalErrors = $totalErrors + 1"
-
-	        echo "[$(tput setaf 1)X$(tput sgr 0)]──$(tput setaf 2)$projectName$(tput sgr 0)"
-            echo " │"
+	        printProjectInfo "$projectName" "error"
+            printLine
             echo "$resp" | sed "s/^/ ╞───/g" | sed "/^ ╞───$/d"
-            echo " │"
+            printLine
         fi
     else
 		let "totalIgnored = $totalIgnored + 1"
-
-	    echo "[$(tput setaf 3)o$(tput sgr 0)]──$(tput setaf 2)$projectName$(tput sgr 0) ne contient pas de Gruntfile.js"
+	    printProjectInfo "$projectName" "nc" "Pas de fichier Gruntfile.js"
 	fi
 done
 
-echo " │"
-echo "─╪────────────────────────────"
-echo " ╞─ $(tput setaf 2)Success$(tput sgr 0)  : $totalSuccess"
-echo " ╞─ $(tput setaf 3)Ignored$(tput sgr 0)  : $totalIgnored"
-echo " ╞─ $(tput setaf 1)Errors $(tput sgr 0)  : $totalErrors"
-echo " ╘────────────────────────────"
+printLine
+printResumeStart
+printResumeLine "Success" "$totalSuccess" "valid" 8
+printResumeLine "Ignored" "$totalIgnored" "nc" 8
+printResumeLine "Errors" "$totalErrors" "error" 8
+printEnd

@@ -26,16 +26,15 @@ then
     elif [ "$1" == "grunt" ] || [ "$1" == "grt" ] ;
     then
         $SCRIPTS_PATH/grunt.sh $2 $3 $4 $5 $6
-    elif [ "$1" == "watch" ] || [ "$1" == "wat" ] ;
-    then
-        $SCRIPTS_PATH/watch.sh $2 $3 $4 $5 $6
     elif [ "$1" == "npm" ] || [ "$1" == "np" ] ;
     then
         $SCRIPTS_PATH/npm.sh $2 $3 $4 $5 $6
     elif [ "$1" == "pom" ] || [ "$1" == "po" ] ;
     then
-#        scriptToUse="pom"
         $SCRIPTS_PATH/pom.sh $2 $3 $4 $5 $6
+    elif [ "$1" == "framework" ] || [ "$1" == "fw" ] ;
+    then
+        $SCRIPTS_PATH/framework.sh $2 $3 $4 $5 $6
     elif [ "$1" == "grep" ] || [ "$1" == "grp" ] ;
     then
         if [ "$2" == "--count" ] || [ "$2" == "-c" ] ;
@@ -65,18 +64,19 @@ then
         echo "AVAILABLE COMMANDS :"
         echo "$(tput setaf 3)GIT :$(tput sgr 0)"
         echo " - $(tput setaf 2)clone$(tput sgr 0)/gcl    => clone every repositories from configuration file (-f)"
-        echo " - $(tput setaf 2)status$(tput sgr 0)/gst   => show Git status for all components/modules (-h)"
-        echo " - $(tput setaf 2)pull$(tput sgr 0)/gpl     => do a Git pull for all components/modules (--stash)"
+        echo " - $(tput setaf 2)status$(tput sgr 0)/gst   => show Git status for all components/modules (-h/-u/-b)"
+        echo " - $(tput setaf 2)pull$(tput sgr 0)/gpl     => do a Git pull for all components/modules (-s/-d)"
         echo "$(tput setaf 3)OTHER :$(tput sgr 0)"
-        echo " - $(tput setaf 2)command$(tput sgr 0)/cmd  => show pom version for all components/modules (-f; -s)"
-        echo " - $(tput setaf 2)pom$(tput sgr 0)/po       => show pom version for all components/modules (-f; -s)"
-        echo " - $(tput setaf 2)grep$(tput sgr 0)/grp     => execute grep commmands in all project (-c; -co)"
-        echo " - $(tput setaf 2)npm$(tput sgr 0)/np       => execute grunt tasks given in parameters (-d)"
-        echo " - $(tput setaf 2)grunt$(tput sgr 0)/grt    => execute grunt tasks given in parameters (-d)"
-        echo " - $(tput setaf 2)userId$(tput sgr 0)/uid   => modify userId in SecurityBouchonConfig.xml"
+        echo " - $(tput setaf 2)command$(tput sgr 0)/cmd  => show pom version for all components/modules"
+        echo " - $(tput setaf 2)pom$(tput sgr 0)/po       => show pom version for all components/modules (-f/-s)"
+        echo " - $(tput setaf 2)framework$(tput sgr 0)/fw => show frameworks versions for all components/modules (-s)"
+        echo " - $(tput setaf 2)grep$(tput sgr 0)/grp     => execute grep commmands in all project (-c/-co)"
+        echo " - $(tput setaf 2)npm$(tput sgr 0)/np       => execute grunt tasks given in parameters"
+        echo " - $(tput setaf 2)grunt$(tput sgr 0)/grt    => execute grunt tasks given in parameters (-d/-a)"
+        echo " - $(tput setaf 2)userId$(tput sgr 0)/uid   => modify userId in SecurityBouchonConfig.xml (-l)"
         echo " - $(tput setaf 2)clean$(tput sgr 0)/cl     => clean projects files (.bak, .log, ...) (-d)"
         echo
-        echo "More informations: https://github.com/flocastera/lbp.toolsfordev.scripts"
+        echo "Plus d'informations dans chaque script ou $(tput setaf 3)en éxécutant un script avec l'argument --help $(tput sgr 0)(pas de -h car conflit)"
     else
         echo
         echo "$(tput setaf 1)Invalid arguments sent : $1$(tput sgr 0)"

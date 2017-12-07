@@ -13,7 +13,7 @@ export SCRIPTS_PATH=$WSP_PATH/lbp.toolsfordev.scripts/scripts
 export repositoriesList="$WSP_PATH/repositories.txt"
 
 # Sert à l'affichage des noms de projets, modifier la regexp si vous renommez vos projets
-export projectNamePatterns="(H[0-9]{2}\-)?[a-zA-Z]*$"
+export projectNamePatterns="(module\-applicatif|composants\-applicatifs)\-(H[0-9]{2}\-)?[a-zA-Z]+"
 
 # Variable qui permet d'isoler les projets (modules/composants) en excluant les dossiers non voulus (.metadata, ...)
 export watchPatterns="(module\-applicatif|composants\-applicatifs)"
