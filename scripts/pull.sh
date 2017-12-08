@@ -1,14 +1,13 @@
 #!/bin/bash
 
-################################
+################################B
 # pull.sh
 # Appel : pull/gpl
-# Description : Permet de mettre à jour le dépot local sur la branche active à partir du dépot distant
-#   Les fichiers mergés seront proposés à la fin du programme
+# Description : Permet de mettre à jour le dépot local sur la branche active à partir du dépot distant. Les fichiers mergés seront proposés à la fin du programme
 # Args :
 #   --stash/-s  : Permet de faire un git stash avant le pull, puis de faire un git stash pop après
 #   --detail/-d : Permet d'afficher toutes les sorties de la commande git pull
-################################
+################################E
 
 . $WSP_PATH/lbp.toolsfordev.scripts/functions.sh
 path="$(pwd)"
@@ -119,7 +118,7 @@ do
             printProjectLine "Local changes stashed !"
         fi
         files=`echo "$resultPull" | sed -E "s/^(\s|\t)*/ ╞─────/g" | sed -E '/^\s*$/d'`
-        echo "$(tput setaf 1)$files $(tput sgr 0)"
+        echo "$files"
         if [ "$isStashed" == "true" ] ;
         then
             printProjectLine "Local changes unstashed !"

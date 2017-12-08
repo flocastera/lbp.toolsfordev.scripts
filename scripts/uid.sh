@@ -1,12 +1,12 @@
 #!/bin/bash
 
-################################
+################################B
 # uid.sh
 # Appel : userId/uid
 # Description : Permet de modifier le code conseiller dans les fichiers SecurityBouchonConfig.xml
 # Args :
 #   --list/-l   : Permet d'afficher tous les codes conseillers sans les modifier
-################################
+################################E
 
 . $WSP_PATH/lbp.toolsfordev.scripts/functions.sh
 

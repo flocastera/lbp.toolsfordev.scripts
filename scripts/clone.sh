@@ -1,5 +1,13 @@
 #!/bin/bash
 
+################################B
+# clone.sh
+# Appel : clone/gcl
+# Description : Permet de cloner les dépots présents dans repositories.txt (décommenter les lignes voulues en supprimant les --)
+# Args :
+#   --force/-f  : Supprime les répertoires existants et fait un clone
+################################E
+
 repositoriesListFile="$repositoriesList"
 
 localProjects=`find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns"`

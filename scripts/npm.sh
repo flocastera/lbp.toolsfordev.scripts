@@ -1,12 +1,12 @@
 #!/bin/bash
 
-################################
+################################B
 # npm.sh
 # Appel : npm/np
 # Description : Permet d'exécuter des tâches npm dans tous les projets
 # Args :
 #   Pas d'arguments
-################################
+################################E
 
 . $WSP_PATH/lbp.toolsfordev.scripts/functions.sh
 args=`echo "$@" | grep -E -o "\-{1,2}[^($| )]+"`

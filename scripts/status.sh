@@ -1,14 +1,14 @@
 #!/bin/bash
 
-################################
+################################B
 # status.sh
 # Appel : status/gst
 # Description : Permet de dresser la liste des fichiers modifiés de la même manière que la commande git status
-# Arguments disponibles :
+# Args :
 #   --hide/-h   : Permet de cacher les fichiers à ne pas commiter (AccreditationService, SecurityBouchonConfig, pom.xml, ...)
 #   --update/-u : Permet de rafraichir le dépôt local et indique s'il est à jour ou derrière/devant le dépot distant
 #   --branch/-b : Permet d'afficher la branche courante
-################################
+################################E
 
 . $WSP_PATH/lbp.toolsfordev.scripts/functions.sh
 args=$@

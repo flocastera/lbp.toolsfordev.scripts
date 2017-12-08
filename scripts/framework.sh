@@ -1,13 +1,12 @@
 #!/bin/bash
 
-################################
+################################B
 # framework.sh
 # Appel : framework/fw
 # Description : Permet d'afficher ou de mettre à jour les versions des frameworks
 # Args :
-#   --update/-u : permet de mettre à jour les frameworks
-#       ex : --update/-u fwad 4.5.5
-################################
+#   --update/-u : permet de mettre à jour les frameworks (ex : --update/-u fwad 4.5.5)
+################################E
 
 . $WSP_PATH/lbp.toolsfordev.scripts/functions.sh
 path="$(pwd)"

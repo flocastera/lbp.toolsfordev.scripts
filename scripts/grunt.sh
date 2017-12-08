@@ -1,12 +1,12 @@
 #!/bin/bash
-################################
+################################B
 # grunt.sh
 # Appel : grunt/grt
 # Description : Permet d'exécuter des tâches Grunt dans tous les projets (sauf watch)
 # Args :
 #   --all/-a    : Permet d'exécuter toutes les tâches communes (browserify et cssmin)
 #   --detail/-d : Affiche la sortie de grunt dans la console
-################################
+################################E
 
 . $WSP_PATH/lbp.toolsfordev.scripts/functions.sh
 args=`echo "$@" | grep -E -o "\-{1,2}[^($| )]+"`

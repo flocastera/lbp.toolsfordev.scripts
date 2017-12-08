@@ -1,12 +1,12 @@
 #!/bin/bash
 
-################################
+################################B
 # command.sh
 # Appel : command/cmd
 # Description : Permet d'exécuter une commande dans tous les projets
 # Args :
 #   Pas d'arguments
-################################
+################################E
 
 . $WSP_PATH/lbp.toolsfordev.scripts/functions.sh
 args=$@

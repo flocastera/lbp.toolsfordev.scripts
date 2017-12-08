@@ -1,12 +1,12 @@
 #!/bin/bash
 
-################################
+################################B
 # clean.sh
 # Appel : clean/cl
 # Description : Permet de nettoyer le projet des fichiers résiduels (*.bak, *.log, *.orig, ...)
 # Args :
 #   --detail/-d : Affiche tous les fichiers supprimés de façon exhaustive
-################################
+################################E
 
 . $WSP_PATH/lbp.toolsfordev.scripts/functions.sh
 path="$(pwd)"

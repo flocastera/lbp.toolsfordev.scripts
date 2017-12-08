@@ -1,14 +1,14 @@
 #!/bin/bash
 
-################################
+################################B
 # pom.sh
 # Appel : pom/pm
 # Description : Permet de dresser la liste des versions des pom.xml, ainsi que les dépendances
 # Args :
-#   --full/-f       : Permet d'afficher les dépendances pour chaque projet
+#   --all/-a        : Permet d'afficher les dépendances pour chaque projet
 #   --sync/-s       : Permet de synchroniser les verions des dépendances avec les pom.xml des projects locaux
 #   --increment/-i  : Permet d'incrémenter de 1 la version de tous les poms (--snapshot pour ajouter le suffixe -SNAPSHOT)
-################################
+################################E
 
 . $WSP_PATH/lbp.toolsfordev.scripts/functions.sh
 path="$(pwd)"
@@ -16,7 +16,7 @@ args=$@
 
 printHelp "$args" "pom.sh" "Ce script permet de dresser la liste des versions" "pom/po" "--full/-f=Affiche les dépendances;--sync/-s=Synchronise les dépendances" "lbp pom --sync;lbp pom;lbp pom -f"
 
-hasArgument "$args" "full;f"
+hasArgument "$args" "all;a"
 if [ $? -eq 1 ] || [ -z "$args" ] ;
 then
     printTitle "Getting POM version for all projects"
