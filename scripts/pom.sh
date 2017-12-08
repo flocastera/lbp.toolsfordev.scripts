@@ -42,7 +42,7 @@ then
 
         printProjectInfo $projectName "valid" `echo "$res" | grep --color=always -E "[0-9]{2,3}\-.*"`
 
-        hasArgument "$args" "full;f"
+        hasArgument "$args" "all;a"
         if [ $? -eq 1 ] ;
         then
             res="$(awk '/<properties>/,/<\/properties>/' pom.xml | grep -Eo '(composant\-applicatif|module)+\-[a-zA-Z0-9]+.*>0[0-9]{1}_[0-9]{2}_[0-9]{2}\.[0-9]{2,3}(\-SNAPSHOT){0,1}' pom.xml | sed 's/.adb.version>/ /g ' | sort  | sed 's/composant-applicatif-/ ╞───/g ')"

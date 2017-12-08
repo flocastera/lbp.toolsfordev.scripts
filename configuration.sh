@@ -9,8 +9,8 @@
 #   export WSP_PATH="D:/ATAD/VEDPSE/vne3cc/nomDuWorkspace8/"
 export WSP_PATH=$WSP_PATH
 
-export SCRIPTS_PATH=$WSP_PATH/lbp.toolsfordev.scripts/scripts
-export repositoriesList="$WSP_PATH/repositories.txt"
+export SCRIPTS_PATH=""
+export repositoriesList=""
 
 # Sert à l'affichage des noms de projets, modifier la regexp si vous renommez vos projets
 export projectNamePatterns="(module\-applicatif|composants\-applicatifs)\-(H[0-9]{2}\-)?[a-zA-Z]+"

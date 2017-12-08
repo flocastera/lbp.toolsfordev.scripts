@@ -40,7 +40,12 @@ do
     then
         nullll=`git remote update 2>&1`
         statusToRemote=`git status -uno | grep -Eo -m 1 "(up\-to\-date|behind|ahead)+"`
-        statusToRemote="$statusToRemote to 'origin'"
+        if [ -n "$statusToRemote" ] ;
+        then
+            statusToRemote="$statusToRemote to 'origin'"
+        else
+            statusToRemote=""
+        fi
     fi
 
     hasArgument "$args" "branch;b"
