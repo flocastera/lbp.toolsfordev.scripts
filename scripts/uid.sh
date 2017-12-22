@@ -8,7 +8,7 @@
 #   --list/-l   : Permet d'afficher tous les codes conseillers sans les modifier
 ################################E
 
-. $WSP_PATH/lbp.toolsfordev.scripts/functions.sh
+. $ROOT_PATH/functions.sh
 
 args=`echo "$@" | grep -E -o "\-{1,2}[^($| )]+"`
 userId=`echo "$@" | grep -E -o "(^| )+[a-zA-Z0-9]+"`
@@ -31,7 +31,7 @@ do
     cd $projectPath
     projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
 
-    files=`find $projectPath -name "SecurityBouchonConfig.xml"`
+    files=`find $projectPath/src/ -name "SecurityBouchonConfig.xml"`
 
     if [ "$files" != "" ] ;
     then
@@ -41,7 +41,7 @@ do
         do
             minFile=`echo "$file" | sed -e "s@$projectPath@@g"`
             hasArgument "$args" "list;l"
-            if [ $? -eq 1 ] ;
+            if [ $? -eq 1 ] || [ -z "$userId" ] ;
             then
                 resultSearch=`grep -E "<property name=\"userId\" value=\".*\"[ ]*\\/>" $file | grep -Eo "value=\".*\"" | grep -Eo "\".*\""`
                 printProjectLine "$minFile => $(tput setaf 2)$resultSearch$(tput sgr 0)"

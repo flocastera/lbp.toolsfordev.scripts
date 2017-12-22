@@ -8,7 +8,7 @@
 #   --detail/-d : Affiche la sortie de grunt dans la console
 ################################E
 
-. $WSP_PATH/lbp.toolsfordev.scripts/functions.sh
+. $ROOT_PATH/functions.sh
 args=`echo "$@" | grep -E -o "\-{1,2}[^($| )]+"`
 tasks=`echo "$@" | grep -E -o "(^| )+[a-zA-Z]+"`
 
@@ -45,7 +45,7 @@ do
     test=`find $projectPath -maxdepth 1 -name "Gruntfile.js" | sed '/^\s*$/d' | wc -l`
 	projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
 
-	if [ "$test" != "0" ] ;
+	if [ $test -ne 0 ] ;
 	then
 		cd $projectPath # Going into project folder to execute grunt commands
 
@@ -65,15 +65,18 @@ do
             else
 	            printProjectLine "Tâches effectuées avec succès" "valid"
             fi
-            printLine
         elif [ `echo "$resp" | grep "Aborted" -ci` != "0" ] ;
         then
 		    let "totalErrors = $totalErrors + 1"
 	        printProjectInfo "$projectName" "error"
             printLine
             echo "$resp" | sed "s/^/ ╞───/g" | sed "/^ ╞───$/d"
-            printLine
+        elif [ `echo "$resp" | grep "Fatal error" -ci` != "0" ] ;
+        then
+	        printProjectInfo "$projectName" "error"
+	        printProjectLine "Pas de grunt ou pas de node_modules" "error"
         fi
+	    printLine
     else
 		let "totalIgnored = $totalIgnored + 1"
 	    printProjectInfo "$projectName" "nc" "Pas de fichier Gruntfile.js"

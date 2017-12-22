@@ -10,7 +10,7 @@
 #   --branch/-b : Permet d'afficher la branche courante
 ################################E
 
-. $WSP_PATH/lbp.toolsfordev.scripts/functions.sh
+. $ROOT_PATH/functions.sh
 args=$@
 
 path="$(pwd)"

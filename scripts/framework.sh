@@ -8,11 +8,11 @@
 #   --update/-u : permet de mettre à jour les frameworks (ex : --update/-u fwad 4.5.5)
 ################################E
 
-. $WSP_PATH/lbp.toolsfordev.scripts/functions.sh
+. $ROOT_PATH/functions.sh
 path="$(pwd)"
 args=$@
 
-printHelp "$args" "framework.sh" "Affiche ou modifie les différentes versions des frameworks" "framework/fw" "--update/-u=Modifie la version du framework passé en paramètre" "lbp fw fwad 2.5.4;lbp fw fwmc 4.4.5;lbp framework toolbox 2.5.14"
+printHelp "$args" "framework.sh" "Affiche ou modifie les différentes versions des frameworks" "framework/fw" "--update/-u=Modifie la version du framework passé en paramètre" "lbp fw -u fwad 2.5.4;lbp fw -u fwmc 4.4.5;lbp framework toolbox 2.5.14"
 
 if [ -z "$args" ] ;
 then
@@ -29,8 +29,8 @@ then
         pomFwmc=`grep -E "<fwmc.adb.version>.*</fwmc.adb.version>" pom.xml | grep -o ">.*<" | grep -E -o "[0-9\.]+" --color=always`
         pomFwad=`grep -E "<fwad.adb.version>.*</fwad.adb.version>" pom.xml | grep -o ">.*<" | grep -E -o "[0-9\.]+" --color=always`
         pomToolbox=`grep -E " <toolbox.adb.version>.*</toolbox.adb.version>" pom.xml | grep -o ">.*<" | grep -E -o "[0-9\.]+" --color=always`
-        htmlFile=`find $projectPath/src/main/resources/public/ -maxdepth 2 -type f | grep 'index.template.html'`
-        htmlIndexFile=`find $projectPath/src/main/resources/public/ -maxdepth 2 -type f | grep 'index.html'`
+        htmlFile=`find $projectPath/src/main/resources/public/ -maxdepth 2 -type f | grep -E 'index.template.html$'`
+        htmlIndexFile=`find $projectPath/src/main/resources/public/ -maxdepth 2 -type f | grep -E 'index.html$'`
         if [ -n "$htmlFile" ] ;
         then
             htmlFwad=`grep -E "<script.*src=\".*/fwad/.*\">" $htmlFile | grep -E -o "/[0-9\.]+/" | grep -E -o "[0-9\.]+" --color=always`
@@ -83,7 +83,7 @@ then
             do
                 cd $projectPath
                 projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
-                pathHtmls="./src/main/resources/public/`echo $projectName | awk '{print tolower($0)}'`"
+                pathHtmls="`find $projectPath/src/main/resources/public/ -maxdepth 1 -type d | grep -E '.*[a-zA-Z]$'`"
                 result=""
 
                 if [ $typeUpdate == "fwad" ] ;
@@ -100,8 +100,8 @@ then
                 elif [ $typeUpdate == "toolbox" ] ;
                 then
                     searchPom="<toolbox\.adb\.version>.*</toolbox\.adb\.version>"
-                    searchJS="src=\"\.\./webjars/cc3toolbox/.*/js/toolbox\-bundle\.min\.js\""
-                    searchCSS="href=\"\.\./webjars/cc3toolbox/.*/styles/css/bundle/toolbox\-bundle\.min\.css\""
+                    searchJS="src=\"\.\./webjars/cc3toolbox/.*/js/toolbox\-bundle(\.min)?\.js\""
+                    searchCSS="href=\"\.\./webjars/cc3toolbox/.*/styles/css/bundle/toolbox\-bundle(\.min)?\.css\""
 
                     replacementPom="<toolbox\.adb\.version>$numVersion</toolbox\.adb\.version>"
                     replacementJS="src=\"\.\./webjars/cc3toolbox/$numVersion/js/toolbox\-bundle\.min\.js\""
@@ -109,8 +109,8 @@ then
 
                     result="$result`sed -i -e "s@$searchPom@$replacementPom@g" pom.xml 2>&1`"
                     result="$result`sed -i -e "s@$searchJS@$replacementJS@g" $pathHtmls/index.html 2>&1`"
-                    result="$result`sed -i -e "s@$searchCSS@$replacementCSS@g" $pathHtmls/index.html 2>&1`"
                     result="$result`sed -i -e "s@$searchJS@$replacementJS@g" $pathHtmls/index.template.html 2>&1`"
+                    result="$result`sed -i -e "s@$searchCSS@$replacementCSS@g" $pathHtmls/index.html 2>&1`"
                     result="$result`sed -i -e "s@$searchCSS@$replacementCSS@g" $pathHtmls/index.template.html 2>&1`"
                 elif [ $typeUpdate == "fwmc" ] ;
                 then

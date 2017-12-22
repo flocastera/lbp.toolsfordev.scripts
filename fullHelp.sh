@@ -15,11 +15,12 @@ echo
 echo "Usage : lbp commandName [arg1] [arg2] ... [argN]"
 echo
 echo "Plus d'informations dans chaque script ou $(tput setaf 3)en éxécutant un script avec l'argument --help $(tput sgr 0)(pas de -h car conflit)"
+echo "Pour faire remonter des bugs ou si vous imaginez des améliorations ou ajouts, envoyez un mail à 'florian.castera@accenture.com'. Merci"
 echo
 echo "AVAILABLE COMMANDS :"
 echo
 
-. $WSP_PATH/lbp.toolsfordev.scripts/functions.sh
+. $ROOT_PATH/functions.sh
 
 if [ -n "$1" ] ;
 then

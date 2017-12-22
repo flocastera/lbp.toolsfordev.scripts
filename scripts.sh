@@ -2,7 +2,7 @@
 
 # Getting paths and other configuration variables
 
-ROOT_PATH=""
+export ROOT_PATH=""
 
 source $ROOT_PATH/configuration.sh
 
@@ -38,9 +38,15 @@ then
     elif [ "$1" == "framework" ] || [ "$1" == "fw" ] ;
     then
         $SCRIPTS_PATH/framework.sh $2 $3 $4 $5 $6
+    elif [ "$1" == "urls" ] || [ "$1" == "ur" ] ;
+    then
+        $SCRIPTS_PATH/urls.sh $2 $3 $4 $5 $6
     elif [ "$1" == "--help" ] || [ "$1" == "-h" ] ;
     then
         $SCRIPTS_PATH/../fullHelp.sh $2 $3 $4 $5 $6
+    elif [ "$1" == "--open" ] || [ "$1" == "-o" ] ;
+    then
+        explorer.exe "$ROOT_PATH/"
     else
         echo
         echo "$(tput setaf 1)Invalid arguments sent : $1$(tput sgr 0)"

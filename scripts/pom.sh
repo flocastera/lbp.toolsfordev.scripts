@@ -10,7 +10,7 @@
 #   --increment/-i  : Permet d'incrémenter de 1 la version de tous les poms (--snapshot pour ajouter le suffixe -SNAPSHOT)
 ################################E
 
-. $WSP_PATH/lbp.toolsfordev.scripts/functions.sh
+. $ROOT_PATH/functions.sh
 path="$(pwd)"
 args=$@
 

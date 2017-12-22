@@ -8,7 +8,7 @@
 #   Pas d'arguments
 ################################E
 
-. $WSP_PATH/lbp.toolsfordev.scripts/functions.sh
+. $ROOT_PATH/functions.sh
 args=`echo "$@" | grep -E -o "\-{1,2}[^($| )]+"`
 tasks=`echo "$@" | grep -E -o "(^| )+[a-zA-Z]+"`
 

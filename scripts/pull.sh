@@ -9,7 +9,7 @@
 #   --detail/-d : Permet d'afficher toutes les sorties de la commande git pull
 ################################E
 
-. $WSP_PATH/lbp.toolsfordev.scripts/functions.sh
+. $ROOT_PATH/functions.sh
 path="$(pwd)"
 pullArgs="$@"
 
@@ -138,15 +138,17 @@ if [ $mergedFilesCount -gt 0 ] ;
 then
     printLine
     read -p " ╞─ There is some unmerged files... Merge them ? (y/n) " merging
+    printLine
     if [ "$merging" == "y" ] ;
     then
         for projectPath in `find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns"`
         do
             projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
             cd $projectPath
-            resultMerge=`git mergetool 2>&1`
             printProjectInfo "$(tput setaf 2)$projectName$(tput sgr 0)" "valid"
-            echo "$resultMerge" | sed -E "s/^(\s|\t)*/ ╞───/g" | sed -E '/^\s*$/d'
+            resultMerge=`git mergetool 2>&1`
+            echo "$resultMerge" | sed -E "s/^(\s|\t)*/ ╞────/g" | sed -E '/^\s*$/d'
+            printLine
         done
     fi
     printLine

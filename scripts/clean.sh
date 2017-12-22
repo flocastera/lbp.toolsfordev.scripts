@@ -8,7 +8,7 @@
 #   --detail/-d : Affiche tous les fichiers supprimés de façon exhaustive
 ################################E
 
-. $WSP_PATH/lbp.toolsfordev.scripts/functions.sh
+. $ROOT_PATH/functions.sh
 path="$(pwd)"
 args=$@
 

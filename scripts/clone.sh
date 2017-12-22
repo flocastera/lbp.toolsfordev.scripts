@@ -26,6 +26,8 @@ repos=`cat $repositoriesListFile | grep -Ev "^(\s)*\-\-" | grep -vE "^$"`
 echo " ╞──$(tput setaf 2)`echo "$repos" | sed '/^\s*$/d' | wc -l`$(tput sgr 0) dépots trouvés dans la liste (après filtrage)"
 echo " │"
 
+cd $WSP_PATH
+
 for repo in $repos
 do
     repoName=`echo "$repo" | sed -e "s@^.*/@@g" | sed -e "s@\\.git\\$@@g"`

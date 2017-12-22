@@ -8,7 +8,7 @@
 #   Pas d'arguments
 ################################E
 
-. $WSP_PATH/lbp.toolsfordev.scripts/functions.sh
+. $ROOT_PATH/functions.sh
 args=$@
 
 printHelp "$args" "command.sh" "Exécute une commande dans tous les répertoires" "command/cmd" "Pas d'arguments" "lbp command ls -l"
@@ -24,6 +24,13 @@ totalSuccess=0
 for projectPath in `find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns"`
 do
 	projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
+
+	## Comment/uncomment in repositories.txt to break loop for projects
+    exclude=`grep "${projectName}" $repositoriesList |  grep '\-\-' -c`
+    if [ $exclude -gt 0 ] ;
+    then
+        continue
+    fi
 
     cd $projectPath
 
