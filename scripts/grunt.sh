@@ -39,7 +39,10 @@ totalIgnored=0
 totalSuccess=0
 
 # Looping over directories in Workspace path
-for projectPath in `find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns"`
+patterns=`cat $ROOT_PATH/.lbpexclude`
+loops=`find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns" | grep -F -v "${patterns}"`
+
+for projectPath in $loops
 do
     # Testing if directory pattern matches watched directories
     test=`find $projectPath -maxdepth 1 -name "Gruntfile.js" | sed '/^\s*$/d' | wc -l`

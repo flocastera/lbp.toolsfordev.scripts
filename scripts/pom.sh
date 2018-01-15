@@ -28,7 +28,7 @@ then
     fi
     printLine
 
-    patterns=`cat $WSP_PATH/.lbpexclude`
+    patterns=`cat $ROOT_PATH/.lbpexclude`
     loops=`find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns" | grep -F -v "${patterns}"`
 
     for projectPath in $loops

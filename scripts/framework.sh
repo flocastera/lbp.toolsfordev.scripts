@@ -20,7 +20,10 @@ then
     printInfo "Affiche de la façon suivante : pom.xml / index.template.html / index.html"
     printLine
 
-    for projectPath in `find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns"`
+    patterns=`cat $ROOT_PATH/.lbpexclude`
+    loops=`find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns" | grep -F -v "${patterns}"`
+
+    for projectPath in $loops
     do
         cd $projectPath
         projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")

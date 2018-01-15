@@ -8,7 +8,10 @@ source $ROOT_PATH/configuration.sh
 
 if [ $# -gt 0 ]
 then
-    if [ "$1" == "status" ] || [ "$1" == "gst" ] ;
+    if [ "$1" == "update" ] ;
+    then
+        $ROOT_PATH/install.sh -u
+    elif [ "$1" == "status" ] || [ "$1" == "gst" ] ;
     then
         $SCRIPTS_PATH/status.sh $2 $3 $4 $5 $6
     elif [ "$1" == "clone" ] || [ "$1" == "gcl" ] ;

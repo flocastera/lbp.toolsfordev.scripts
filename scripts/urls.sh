@@ -32,16 +32,12 @@ totalErrors=0
 totalIgnored=0
 totalSuccess=0
 
-for projectPath in `find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns"`
+patterns=`cat $ROOT_PATH/.lbpexclude`
+loops=`find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns" | grep -F -v "${patterns}"`
+
+for projectPath in $loops
 do
 	projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
-
-	## Comment/uncomment in repositories.txt to break loop for projects
-    exclude=`grep "${projectName}" $repositoriesList |  grep '\-\-' -c`
-    if [ $exclude -gt 0 ] ;
-    then
-        continue
-    fi
 
     cd $projectPath
 

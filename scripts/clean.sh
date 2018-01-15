@@ -24,7 +24,10 @@ printInfo "Files to delete : '$(tput setaf 2)$filesToDelete$(tput sgr 0)'"
 printInfo "Excluded paths : '$(tput setaf 2)$exludedPaths$(tput sgr 0)'"
 printLine
 
-for projectPath in `find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns"`
+patterns=`cat $ROOT_PATH/.lbpexclude`
+loops=`find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns" | grep -F -v "${patterns}"`
+
+for projectPath in $loops
 do
     cd $projectPath
     projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")

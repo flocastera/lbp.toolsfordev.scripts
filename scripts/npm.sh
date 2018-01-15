@@ -25,7 +25,10 @@ totalIgnored=0
 totalSuccess=0
 
 # Looping over directories in Workspace path
-for projectPath in `find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns"`
+patterns=`cat $ROOT_PATH/.lbpexclude`
+loops=`find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns" | grep -F -v "${patterns}"`
+
+for projectPath in $loops
 do
     cd $projectPath
 	projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")

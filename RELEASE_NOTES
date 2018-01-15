@@ -1,0 +1,5 @@
+2.1
+15/01/2018
+-Exclure des dossiers de la boucle dans le fichier .lbpexclude
+-Mettre à jour les scripts et le lanceur avec la commande 'lbp update'
+-Réparation du script 'urls' et 'uid' qui montrait des lignes vides
