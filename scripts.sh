@@ -44,12 +44,18 @@ then
     elif [ "$1" == "urls" ] || [ "$1" == "ur" ] ;
     then
         $SCRIPTS_PATH/urls.sh $2 $3 $4 $5 $6
+    elif [ "$1" == "merge" ] || [ "$1" == "gbm" ] ;
+    then
+        $SCRIPTS_PATH/merge.sh $2 $3 $4 $5 $6
+    elif [ "$1" == "branch" ] || [ "$1" == "gbr" ] ;
+    then
+        $SCRIPTS_PATH/branch.sh $2 $3 $4 $5 $6
     elif [ "$1" == "--help" ] || [ "$1" == "-h" ] ;
     then
         $SCRIPTS_PATH/../fullHelp.sh $2 $3 $4 $5 $6
     elif [ "$1" == "--open" ] || [ "$1" == "-o" ] ;
     then
-        explorer.exe "$ROOT_PATH/"
+        start "$ROOT_PATH/"
     else
         echo
         echo "$(tput setaf 1)Invalid arguments sent : $1$(tput sgr 0)"

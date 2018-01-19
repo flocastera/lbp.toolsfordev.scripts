@@ -18,7 +18,7 @@ then
 
     echo
     echo "[$(tput setaf 3)O$(tput sgr 0)] Mise à jour des scripts..."
-    cp -r -v "$sourcePath/scripts" "$ROOT_PATH/scripts"
+    cp -v -r "$sourcePath/scripts/" "$ROOT_PATH/"
     echo "[$(tput setaf 2)V$(tput sgr 0)] Mise à jour des scripts terminée !"
 
     echo

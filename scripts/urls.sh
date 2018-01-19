@@ -13,7 +13,7 @@ args=$@
 
 urlLocal="http://localhost:8080"
 urlTas="http://h50-intranetsf-slot1-asse-cc3r5e1-unsecured.service-dev.stomv2.hpmetier.sf.intra.laposte.fr"
-urlTfo="http://h50-intranetsf-slot1-tfon-cc3r5e2-unsecured.service-dev.stomv2.hpmetier.sf.intra.laposte.fr"
+urlTfo="http://h50-intranetsf-slot1-tfon-cc3r5e1-unsecured.service-dev.stomv2.hpmetier.sf.intra.laposte.fr"
 urlPersos="sda===>http://331923SSB28.dct.adt.local:8080;"
 
 printHelp "$args" "urls.sh" "Permet d'afficher ou modifier les urls d'assemblages dans les gcp" "urls/ur" "Pas d'arguments" "lbp urls tass"

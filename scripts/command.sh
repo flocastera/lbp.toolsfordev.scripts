@@ -9,6 +9,7 @@
 ################################E
 
 . $ROOT_PATH/functions.sh
+export gcol
 args=$@
 
 printHelp "$args" "command.sh" "Exécute une commande dans tous les répertoires" "command/cmd" "Pas d'arguments" "lbp command ls -l"
@@ -30,9 +31,8 @@ do
 
     cd $projectPath
 
-    resp=`$args`
+    resp=`$args 2>&1`
     printProjectInfo "$projectName" "valid"
-    printLine
     echo "$resp" | sed "s/^/ ╞───/g" | sed "/^ ╞───$/d"
     printLine
 
