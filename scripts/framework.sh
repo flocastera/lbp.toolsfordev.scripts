@@ -71,6 +71,7 @@ then
     then
         printInfo "S'utilise de la façon suivante : lbp -u <type> <version>"
         printInfo "──> <type> : fwad/fwmc/toolbox"
+        printInfo "──> <version> : 3.5.0"
         printInfo "Sortie du programme !"
     else
         numVersion=`echo "$args" | grep -E -o "(fwad|fwmc|toolbox)+\s[0-9\.]+" | grep -E -o "[0-9\.]+"`
