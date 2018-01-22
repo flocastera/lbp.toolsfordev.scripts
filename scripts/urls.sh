@@ -18,8 +18,7 @@ urlPersos="sda===>http://331923SSB28.dct.adt.local:8080;"
 
 printHelp "$args" "urls.sh" "Permet d'afficher ou modifier les urls d'assemblages dans les gcp" "urls/ur" "Pas d'arguments" "lbp urls tass"
 
-hasArgument "$args" "list;l"
-if [ $? -eq 1 ] ;
+if [ -z "$args" ] ;
 then
     printTitle "Listing urls in all projects' GCP"
 else
