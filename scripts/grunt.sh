@@ -17,7 +17,7 @@ printHelp "$args" "grunt.sh" "Exécute les tâches Grunt passées en paramètres
 hasArgument "$args" "all;a"
 if [ $? -eq 1 ] ;
 then
-    tasks="browserify cssmin"
+    tasks="browserify cssmin indexCompile"
 fi
 
 printTitle "Executing grunt tasks for all projects"

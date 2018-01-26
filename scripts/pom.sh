@@ -64,15 +64,17 @@ then
     printInfo "$(tput setaf 3)Ne pas utiliser Ctrl+C, ou alors supprimer le fichier tmpFile à la racine$(tput sgr 0)"
     printLine
 
-    projects=`find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns"`
+    patterns=`cat $ROOT_PATH/.lbpexclude`
+    loops=`find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns" | grep -F -v "${patterns}"`
+
     tempFile="$WSP_PATH/tmpFile"
-    for project in $projects
+    for project in $loops
     do
         chem="$project/pom.xml"
         pomVersion="$(grep -E '<version>.*</version>' $chem -m 2 | tail -1 | sed -e 's@.*<version>@@g' | sed -e 's@</version>.*@@g')"
         echo "$(echo $project | grep -Eo '[a-zA-Z0-9-]+$' | awk '{print tolower($0)}' | sed 's@composants@composant@g' | sed 's@applicatifs@applicatif@g' | sed 's@formules@formule@g' | sed 's@autres@autre@g' | sed 's@produits@produit@g'):$pomVersion" >> $tempFile
     done
-    for project in $projects
+    for project in $loops
     do
         chem="$project/pom.xml"
         dependencies=`awk '/<properties>/,/<\/properties>/' $chem | grep -Eo '(composant\-applicatif|module)+\-[a-zA-Z0-9]+.*>0[0-9]{1}_[0-9]{2}_[0-9]{2}\.[0-9]{2,3}(\-SNAPSHOT){0,1}' | grep -Eo '(composant\-applicatif|module)+\-[a-zA-Z0-9]+' | sed 's@(\s)+$@@g'`
