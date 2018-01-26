@@ -16,25 +16,25 @@ Plus d'informations dans chaque script ou en éxécutant un script avec l'argume
 Pour faire remonter des bugs ou si vous imaginez des améliorations ou ajouts, envoyez un mail à 'florian.castera@accenture.com'. Merci
 
 
-#####Name : branch.sh
+##### Name : branch.sh
 Appel : lbp branch/gbr <br>
 Description : Permet de passer à la branche passé en paramètre <br>
 Arguments : <br>
 *  Pas d'arguments <br>
 
-#####Name : clean.sh
+##### Name : clean.sh
 Appel : lbp clean/cl <br>
 Description : Permet de nettoyer le projet des fichiers résiduels (*.bak, *.log, *.orig, ...) <br>
 Arguments : <br>
 *  --detail/-d : Affiche tous les fichiers supprimés de façon exhaustive <br>
 
-#####Name : clone.sh
+##### Name : clone.sh
 Appel : lbp clone/gcl <br>
 Description : Permet de cloner les dépots présents dans repositories.txt (décommenter les lignes voulues en supprimant les --) <br>
 Arguments : <br>
 *  --force/-f  : Supprime les répertoires existants et fait un clone <br>
 
-#####Name : command.sh
+##### Name : command.sh
 Appel : lbp command/cmd <br>
 Description : Permet d'exécuter une commande dans tous les projets <br>
 Arguments : <br>
