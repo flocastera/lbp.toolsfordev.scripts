@@ -152,3 +152,44 @@ then
     printResumeLine "Ignored" "$errors" "nc" 12
     printEnd
 fi
+
+hasArgument "$args" "decrement;d"
+if [ $? -eq 1 ] ;
+then
+    printTitle "Decrementing POM versions version for all projects"
+    printLine
+    updated=0
+    errors=0
+
+    for pom in `find $WSP_PATH -maxdepth 2 -type f | grep -E "pom.xml"`
+    do
+        pomVersion="$(grep -E '<version>.*</version>' $pom -m 2 | tail -1 | sed -e 's@.*<version>@@g' | sed -e 's@</version>.*@@g')"
+        pomVersionExt=`echo "$pomVersion" | grep -E '[0-9]{2,3}(\-SNAPSHOT)$' -o | grep -E '^[0-9]{2,3}' -o | grep -E '[0-9]{2}$' -o`
+        let newPomVersion="$pomVersionExt - 1"
+
+        hasArgument "$args" "snapshot"
+        if [ $? -eq 1 ] ;
+        then
+            newPomVersion="0$newPomVersion-SNAPSHOT"
+        else
+            newPomVersion="0$newPomVersion"
+        fi
+        pomVersionStr=`echo "$pomVersion" | grep -E '^[0-9]{2}_[0-9]{2}_[0-9]{2}\.' -o`
+        pomVersionFinal=`echo "$pomVersionStr$newPomVersion"`
+        sed -i -e "s@<version>$pomVersion</version>@<version>${pomVersionFinal}<\\/version>@g" $pom
+        projectName=$(echo $pom | grep -Eo "$projectNamePatterns")
+        if [ `grep "<version>$pomVersionFinal</version>" -c $pom` -gt 0 ] ;
+        then
+            printProjectInfo "$projectName" "valid" "decremented to $(tput setaf 2)$pomVersionFinal$(tput sgr 0)"
+            let updated=$updated+1
+        else
+            let errors=$errors+1
+            printProjectInfo "$projectName" "nc" "not decremented !"
+        fi
+        printLine
+    done
+    printResumeStart
+    printResumeLine "Decremented" "$updated" "valid" 13
+    printResumeLine "Ignored" "$errors" "nc" 13
+    printEnd
+fi
