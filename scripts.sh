@@ -50,6 +50,9 @@ then
     elif [ "$1" == "branch" ] || [ "$1" == "gbr" ] ;
     then
         $SCRIPTS_PATH/branch.sh $2 $3 $4 $5 $6
+    elif [ "$1" == "logs" ] || [ "$1" == "lo" ] ;
+    then
+        $SCRIPTS_PATH/log.sh $2 $3 $4 $5 $6
     elif [ "$1" == "--help" ] || [ "$1" == "-h" ] ;
     then
         $SCRIPTS_PATH/../fullHelp.sh $2 $3 $4 $5 $6
