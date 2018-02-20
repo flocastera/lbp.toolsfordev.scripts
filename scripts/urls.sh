@@ -23,7 +23,14 @@ if [ -z "$args" ] ;
 then
     printTitle "Listing urls in all projects' GCP"
 else
-    printTitle "Changing urls in all projects' GCP"
+    if [ "$args" == "tass" ] || [ "$args" == "tfo" ] || [ "$args" == "local" ] || [ `echo "$args" | grep -E "perso=[a-zA-Z0-9]+" -c` -gt 0 ] ;
+    then
+        printTitle "Changing urls in all projects' GCP to $(tput setaf 3)$args$(tput sgr 0)"
+    else
+        echo
+        printProjectInfo "Exiting because argument is not valid" "error" "'$args'"
+        exit
+    fi
 fi
 printInfo "Arguments : '$(tput setaf 2)$args$(tput sgr 0)'"
 printLine
@@ -54,22 +61,22 @@ do
     else
         if [ "$args" == "tass" ] ;
         then
-            printProjectInfo "$projectName" "valid" "Changed to $(tput setaf 3)TASS$(tput sgr 0) url"
+            printProjectInfo "$projectName" "valid"
             sed -i -e "s@^ASSEMBLAGE_HTTP_URL_BASE=.*@ASSEMBLAGE_HTTP_URL_BASE=${urlTas}@g" $projectPath/src/main/resources/gcp.properties
         elif [ "$args" == "tfo" ] ;
         then
-            printProjectInfo "$projectName" "valid" "Changed to $(tput setaf 3)TFO$(tput sgr 0) url"
+            printProjectInfo "$projectName" "valid"
             sed -i -e "s@^ASSEMBLAGE_HTTP_URL_BASE=.*@ASSEMBLAGE_HTTP_URL_BASE=${urlTfo}@g" $projectPath/src/main/resources/gcp.properties
         elif [ "$args" == "local" ] ;
         then
-            printProjectInfo "$projectName" "valid" "Changed to $(tput setaf 3)LOCAL$(tput sgr 0) url"
+            printProjectInfo "$projectName" "valid"
             sed -i -e "s@^ASSEMBLAGE_HTTP_URL_BASE=.*@ASSEMBLAGE_HTTP_URL_BASE=${urlLocal}@g" $projectPath/src/main/resources/gcp.properties
         elif [ `echo "$args" | grep -E "perso=[a-zA-Z0-9]+" -c` -gt 0 ] ;
         then
             urlName=`echo "$args" | grep -E -o "perso=[a-zA-Z0-9]+" | sed 's/perso=//g'`
             url=`echo "$urlPersos" | tr ';' '\n' | grep -E "${urlName}===>.*" | sed "s/${urlName}===>//g"`
             sed -i -e "s@^ASSEMBLAGE_HTTP_URL_BASE=.*@ASSEMBLAGE_HTTP_URL_BASE=${url}@g" $projectPath/src/main/resources/gcp.properties
-            printProjectInfo "$projectName" "valid" "Changed to $(tput setaf 3)$urlName$(tput sgr 0) ($url)"
+            printProjectInfo "$projectName" "valid"
         fi
     fi
 

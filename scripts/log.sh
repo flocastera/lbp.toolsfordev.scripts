@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ################################B
-# urls.sh
-# Appel : urls/ur
-# Description : Permet d'afficher ou modifier les urls d'assemblages dans les gcp
+# log.sh
+# Appel : logs/lo
+# Description : Permet de modifier les niveaux de logs pour les frameworks
 # Args :
 #   Pas d'arguments
 ################################E
@@ -11,7 +11,7 @@
 . $ROOT_PATH/functions.sh
 args=$@
 
-printHelp "$args" "urls.sh" "Permet d'afficher ou modifier les urls d'assemblages dans les gcp" "urls/ur" "Pas d'arguments" "lbp urls tass"
+printHelp "$args" "log.sh" "Permet de modifier les niveaux de logs pour les frameworks" "Pas d'arguments" "lbp log info"
 
 level=""
 
