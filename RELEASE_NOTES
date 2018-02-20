@@ -1,5 +1,7 @@
-2.1
-15/01/2018
--Exclure des dossiers de la boucle dans le fichier .lbpexclude
--Mettre à jour les scripts et le lanceur avec la commande 'lbp update'
--Réparation du script 'urls' et 'uid' qui montrait des lignes vides
+2.2
+20/02/2018
+-Mettre à jour les scripts et le lanceur avec la commande 'lbp update' (amélioration)
+-Ajout du script logs pour modifier le niveau de log
+-Ajout d'url perso dans le script urls
+-Correctif du script framework
+-Ajout de l'option decrement et increment dans le script pom

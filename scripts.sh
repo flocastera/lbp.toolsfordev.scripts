@@ -2,8 +2,6 @@
 
 # Getting paths and other configuration variables
 
-export ROOT_PATH=""
-
 source $ROOT_PATH/configuration.sh
 
 if [ $# -gt 0 ]

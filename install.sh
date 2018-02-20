@@ -2,7 +2,7 @@
 
 
 scriptsPath=`pwd`
-sourcePath="/z/_Projet/Cap Client 3.0/R4-Release 4/VTE-EER et Multivente_/OUTILS/lbp.toolsfordev.scripts"
+sourcePath="//ecp.sf.local/_commun-vlp/_COMMUN/_Projet/Cap Client 3.0/R4-Release 4/VTE-EER et Multivente_/OUTILS/lbp.toolsfordev.scripts"
 
 if [ "$#" -gt 0 ] && [ "$1" == "-u" ];
 then
@@ -11,14 +11,17 @@ then
     ####################
     echo
     echo "[$(tput setaf 3)O$(tput sgr 0)] Mise à jour du lanceur..."
-    cp -v "$sourcePath/functions.sh" "$ROOT_PATH/functions.sh"
-    cp -v "$sourcePath/scripts.sh" "$ROOT_PATH/scripts.sh"
-    sed -i -e "s@ROOT_PATH=.*@ROOT_PATH=\"${ROOT_PATH}\"@g" "$ROOT_PATH/scripts.sh"
+    echo " │"
+    cp -v "$sourcePath/functions.sh" "$ROOT_PATH/functions.sh" | cut -d/ -f11- | sed "s/^/ ╞──'/g"
+    cp -v "$sourcePath/scripts.sh" "$ROOT_PATH/scripts.sh" | cut -d/ -f11- | sed "s/^/ ╞──'/g"
+    echo " │"
     echo "[$(tput setaf 2)V$(tput sgr 0)] Mise à jour du lanceur terminée !"
 
     echo
     echo "[$(tput setaf 3)O$(tput sgr 0)] Mise à jour des scripts..."
-    cp -v -r "$sourcePath/scripts/" "$ROOT_PATH/"
+    echo " │"
+    cp -v -r "$sourcePath/scripts/" "$ROOT_PATH/" | cut -d/ -f11- | sed "s/^/ ╞──'/g"
+    echo " │"
     echo "[$(tput setaf 2)V$(tput sgr 0)] Mise à jour des scripts terminée !"
 
     echo
@@ -46,7 +49,7 @@ else
     echo
 
     # Paramètrage du fichier configuration.sh
-    sed -i -e "s@ROOT_PATH=.*@ROOT_PATH=\"${scriptsPath}\"@g" $scriptsPath/scripts.sh
+    setx ROOT_PATH "$scriptsPath"
     sed -i -e "s@SCRIPTS_PATH=.*@SCRIPTS_PATH=${scriptsPath}/scripts@g" $scriptsPath/configuration.sh
     sed -i -e "s@repositoriesList=.*@repositoriesList=${scriptsPath}/repositories.txt@g" $scriptsPath/configuration.sh
 
