@@ -5,7 +5,7 @@ hasArgument(){
 	searches=`echo "$2" | tr ';' '\n'`
 	retour=0
 
-	longArgs=`echo "$1" | grep -Eo "\-\-[a-zA-Z0-9=]+" | grep -Eo "[a-zA-Z0-9=]+" | sed '/^\s*$/d'`
+	longArgs=`echo "$1" | grep -Eo "\-\-[a-zA-Z0-9=\-]+" | grep -Eo "[a-z]{1}[a-zA-Z0-9=\-]+" | sed '/^\s*$/d'`
 	shortArgs=`echo "$1" | grep -Eo "(^|\s)\-[a-zA-Z]+" | grep -Eo "[a-zA-Z]{1}" | sed '/^\s*$/d'`
 
 	for search in $searches
@@ -117,6 +117,33 @@ printProjectInfo(){
         str="$str : $info"
     fi
     echo $str
+}
+
+printProjectInfoTemp(){
+    project=$1
+    state=$2
+    info="$3 $4 $5"
+
+    if [ "$state" == "valid" ] ;
+    then
+        state="$(tput setaf 2)V$(tput sgr 0)"
+    elif [ "$state" == "error" ] ;
+    then
+        state="$(tput setaf 1)X$(tput sgr 0)"
+    elif [ "$state" == "nc" ] ;
+    then
+        state="$(tput setaf 3)O$(tput sgr 0)"
+    else
+        state=" "
+    fi
+
+    str="[$state]──$(tput setaf 2)$project$(tput sgr 0)"
+
+    if [ -n "$info" ]  ;
+    then
+        str="$str : $info"
+    fi
+    echo -ne "$str\r"
 }
 
 printProjectLine(){

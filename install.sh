@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 scriptsPath=`pwd`
 sourcePath="//ecp.sf.local/_commun-vlp/_COMMUN/_Projet/Cap Client 3.0/R4-Release 4/VTE-EER et Multivente_/OUTILS/lbp.toolsfordev.scripts"
 

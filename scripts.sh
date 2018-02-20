@@ -36,6 +36,9 @@ then
     elif [ "$1" == "pom" ] || [ "$1" == "po" ] ;
     then
         $SCRIPTS_PATH/pom.sh $2 $3 $4 $5 $6
+    elif [ "$1" == "grep" ] || [ "$1" == "grp" ] ;
+    then
+        $SCRIPTS_PATH/grep.sh $2 $3 $4 $5 $6
     elif [ "$1" == "framework" ] || [ "$1" == "fw" ] ;
     then
         $SCRIPTS_PATH/framework.sh $2 $3 $4 $5 $6
