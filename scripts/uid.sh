@@ -33,6 +33,7 @@ for projectPath in $loops
 do
     cd $projectPath
     projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
+    printProjectInfoTemp "$projectName" "nc"
 
     files=`find $projectPath/src/ -name "SecurityBouchonConfig.xml"`
 
@@ -65,7 +66,7 @@ do
         printLine
     else
         let "errorsFilesCount = $errorsFilesCount + 1"
-        printProjectInfo "$projectName" "nc"
+        printProjectInfo "$projectName" "error"
         printProjectLine "Pas de fichier 'SecurityBouchonConfig.xml' !"
         printLine
     fi

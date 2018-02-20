@@ -36,20 +36,24 @@ then
         cd $projectPath
         projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
 
+        printProjectInfoTemp $projectName "nc"
+
         res="$(grep -E "<version>.*</version>" pom.xml -m 2 | tail -1)"
         res=${res:11}
         res="$(echo $res | sed 's/.\{10\}$//')"
 
-        printProjectInfo $projectName "valid" `echo "$res" | grep --color=always -E "[0-9]{2,3}\-.*"`
 
         hasArgument "$args" "all;a"
         if [ $? -eq 1 ] ;
         then
-            res="$(awk '/<properties>/,/<\/properties>/' pom.xml | grep -Eo '(composant\-applicatif|module)+\-[a-zA-Z0-9]+.*>0[0-9]{1}_[0-9]{2}_[0-9]{2}\.[0-9]{2,3}(\-SNAPSHOT){0,1}' pom.xml | sed 's/.adb.version>/ /g ' | sort  | sed 's/composant-applicatif-/ ╞───/g ')"
-            if [ $(echo "$res" | sed '/^\s*$/d' | wc -l) -gt 0 ] ;
+            resA="$(awk '/<properties>/,/<\/properties>/' pom.xml | grep -Eo '(composant\-applicatif|module)+\-[a-zA-Z0-9]+.*>0[0-9]{1}_[0-9]{2}_[0-9]{2}\.[0-9]{2,3}(\-SNAPSHOT){0,1}' pom.xml | sed 's/.adb.version>/ /g ' | sort  | sed 's/composant-applicatif-/ ╞───/g ')"
+            printProjectInfo $projectName "valid" `echo "$res" | grep --color=always -E "[0-9]{2,3}\-.*"`
+            if [ $(echo "$resA" | sed '/^\s*$/d' | wc -l) -gt 0 ] ;
             then
-                echo "$res" | grep --color -E '[0-9]{2,3}(\-.*|$)'
+                echo "$resA" | grep --color -E '[0-9]{2,3}(\-.*|$)'
             fi
+        else
+            printProjectInfo $projectName "valid" `echo "$res" | grep --color=always -E "[0-9]{2,3}\-.*"`
         fi
         printLine
     done

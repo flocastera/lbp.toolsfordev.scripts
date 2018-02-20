@@ -45,6 +45,7 @@ loops=`find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns" | grep -F -
 for projectPath in $loops
 do
 	projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
+    printProjectInfoTemp "$projectName" "nc"
 
     cd $projectPath
 
@@ -77,6 +78,8 @@ do
             url=`echo "$urlPersos" | tr ';' '\n' | grep -E "${urlName}===>.*" | sed "s/${urlName}===>//g"`
             sed -i -e "s@^ASSEMBLAGE_HTTP_URL_BASE=.*@ASSEMBLAGE_HTTP_URL_BASE=${url}@g" $projectPath/src/main/resources/gcp.properties
             printProjectInfo "$projectName" "valid"
+        else
+            printProjectInfo "$projectName" "error"
         fi
     fi
 

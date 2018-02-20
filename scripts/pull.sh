@@ -30,6 +30,9 @@ loops=`find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns" | grep -F -
 for projectPath in $loops
 do
 	projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
+
+    printProjectInfoTemp "$projectName" "nc"
+
     cd $projectPath
 
     resultStash=""
@@ -51,7 +54,7 @@ do
         then
 		    let "mergedFilesCount = $mergedFilesCount + 1"
             isStashed="false"
-            printProjectInfo "$(tput setaf 2)$projectName$(tput sgr 0)" "error"
+            printProjectInfo "$projectName" "error"
             printProjectLine "Unable to stash local changes because of unmerged files !" "nc"
             printProjectLine "Aborting pull for this project !" "nc"
             printProjectLine "Files :"

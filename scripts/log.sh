@@ -39,6 +39,7 @@ do
 	projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
 
     cd $projectPath
+    printProjectInfoTemp "$projectName" "nc"
 
     if [ -f "$projectPath/src/main/resources/log4j.properties" ]; then
         sed -i -r "s@^log4j\.category\.fr\.laposte\.disf\.fwmc\.internal\.arch\.isolation\.nosql=[A-Z]+@log4j\.category\.fr\.laposte\.disf\.fwmc\.internal\.arch\.isolation\.nosql=${level}@g" $projectPath/src/main/resources/log4j.properties

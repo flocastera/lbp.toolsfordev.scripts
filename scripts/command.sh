@@ -28,10 +28,12 @@ loops=`find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns" | grep -F -
 for projectPath in $loops
 do
 	projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
-
     cd $projectPath
 
+    printProjectInfoTemp "$projectName" "nc"
+
     resp=`$args 2>&1`
+
     printProjectInfo "$projectName" "valid"
     echo "$resp" | sed "s/^/ ╞───/g" | sed "/^ ╞───$/d"
     printLine

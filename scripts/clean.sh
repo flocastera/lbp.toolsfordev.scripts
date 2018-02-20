@@ -32,6 +32,8 @@ do
     cd $projectPath
     projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
 
+    printProjectInfoTemp "$projectName" "nc"
+
     result=`find $projectPath | grep -Ev "$exludedPaths" | grep -E "$filesToDelete"`
     count=`echo "$result" | sed '/^\s*$/d' | wc -l`
 
@@ -39,7 +41,7 @@ do
 
     if [ $count -gt 0 ] ;
     then
-        printProjectInfo "$projectName" "nc"
+        printProjectInfo "$projectName" "valid"
 
         for file in `echo "$result"`
         do
@@ -55,8 +57,8 @@ do
             printProjectLine "$count files will be removed !"
         fi
     else
-        printProjectInfo "$projectName" "valid"
-        printProjectLine "Project is clean !"
+        printProjectInfo "$projectName" "error"
+        printProjectLine "Project is already clean !"
     fi
     printLine
 done

@@ -27,7 +27,7 @@ then
     do
         cd $projectPath
         projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
-        printProjectInfo $projectName "valid"
+        printProjectInfoTemp $projectName "nc"
 
         pomFwmc=`grep -E "<fwmc.adb.version>.*</fwmc.adb.version>" pom.xml | grep -o ">.*<" | grep -E -o "[0-9\.]+" --color=always`
         pomFwad=`grep -E "<fwad.adb.version>.*</fwad.adb.version>" pom.xml | grep -o ">.*<" | grep -E -o "[0-9\.]+" --color=always`
@@ -44,6 +44,8 @@ then
             htmlIndexFwad=`grep -E "<script.*src=\".*/fwad/.*\">" $htmlIndexFile | grep -E -o "/[0-9\.]+/" | grep -E -o "[0-9\.]+" --color=always`
             htmlIndexToolbox=`grep -E "<script.*src=\".*/cc3toolbox/.*\">" $htmlIndexFile | grep -E -o "/[0-9\.]+/" | grep -E -o "[0-9\.]+" --color=always`
         fi
+
+        printProjectInfo $projectName "valid"
 
         if [ -n "$pomToolbox" ] ;
         then
@@ -92,6 +94,7 @@ then
                 projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
                 pathHtmls="`find $projectPath/src/main/resources/public/ -maxdepth 1 -type d | grep -E '.*[a-zA-Z]$'`"
                 result=""
+                printProjectInfoTemp $projectName "nc"
 
                 if [ $typeUpdate == "fwad" ] ;
                 then
@@ -130,7 +133,7 @@ then
 
                 if [ `echo "$result" | grep "No such file or directory" -c` -gt 0 ] ;
                 then
-                    printProjectInfo $projectName "nc"
+                    printProjectInfo $projectName "error"
                     printProjectLine "pom.xml à jour à la version $(tput setaf 2)$numVersion $(tput sgr 0)" "valid"
                     printProjectLine "Certains fichiers sont introuvables dans le projet" "nc"
                 else

@@ -34,6 +34,7 @@ for projectPath in $loops
 do
     cd $projectPath # Going into project folder to execute Git commands
     projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
+    printProjectInfoTemp "$projectName" "nc"
 
     statusToRemote=""
     branch=""

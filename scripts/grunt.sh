@@ -48,6 +48,8 @@ do
     test=`find $projectPath -maxdepth 1 -name "Gruntfile.js" | sed '/^\s*$/d' | wc -l`
 	projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
 
+    printProjectInfoTemp $projectName "nc"
+
 	if [ $test -ne 0 ] ;
 	then
 		cd $projectPath # Going into project folder to execute grunt commands
@@ -82,7 +84,7 @@ do
 	    printLine
     else
 		let "totalIgnored = $totalIgnored + 1"
-	    printProjectInfo "$projectName" "nc" "Pas de fichier Gruntfile.js"
+	    printProjectInfo "$projectName" "nc" "Exclut, pas de fichier Gruntfile.js"
 	fi
 done
 
