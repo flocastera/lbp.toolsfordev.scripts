@@ -32,7 +32,23 @@ do
 
     printProjectInfoTemp "$projectName" "nc"
 
-    resp=`$args 2>&1`
+    callStr="$1 "
+    cpt=0
+    for param in "$@"
+    do
+        if [ $cpt -gt 0 ] && [ ! -z "$param" ] ;
+        then
+            if [ `echo "$param" | grep " " -c` -gt 0 ] ;
+            then
+                callStr="$callStr\"$param\" "
+            else
+                callStr="$callStr$param "
+            fi
+        fi
+        let cpt=$cpt+1
+    done
+
+    resp=`$callStr 2>&1`
 
     printProjectInfo "$projectName" "valid"
     echo "$resp" | sed "s/^/ ╞───/g" | sed "/^ ╞───$/d"

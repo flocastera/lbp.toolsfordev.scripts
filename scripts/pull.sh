@@ -50,6 +50,14 @@ do
         if [ `echo "$resultStash" | grep -Eci "no local changes to save"` -gt 0 ] ;
         then
             isStashed="false"
+        elif [ `echo "$resultStash" | grep -Eci "index.lock': File exists"` -gt 0 ] ;
+        then
+		    let "errorsFilesCount = $errorsFilesCount + 1"
+            isStashed="false"
+            printProjectInfo "$projectName" "error"
+            printProjectLine "Unable to stash local changes because .git/index.lock file exists !" "error"
+            printLine
+            continue
         elif [ `echo "$resultStash" | grep -Eci "(fatal|error)+"` -gt 0 ] ;
         then
 		    let "mergedFilesCount = $mergedFilesCount + 1"

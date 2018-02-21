@@ -59,7 +59,7 @@ do
         branch="on branch $(tput setaf 3)$branch$(tput sgr 0)"
     fi
 
-    result=`git status -s`                                  # Getting general status for project
+    result=`git status -s 2>&1`                                  # Getting general status for project
     resultModified=`echo "$result" | grep -E "^(\s)?M.*"`   # Getting modified files
     resultAdded=`echo "$result" | grep -E "^(\s)?A.*"`      # Getting added files
     resultDeleted=`echo "$result" | grep -E "^(\s)?D.*"`    # Getting deleted files

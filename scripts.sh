@@ -20,7 +20,7 @@ then
         $SCRIPTS_PATH/pull.sh $2 $3 $4 $5 $6
     elif [ "$1" == "command" ] || [ "$1" == "cmd" ] ;
     then
-        $SCRIPTS_PATH/command.sh $2 $3 $4 $5 $6
+        $SCRIPTS_PATH/command.sh "$2" "$3" "$4" "$5" "$6"
     elif [ "$1" == "userId" ] || [ "$1" == "uid" ] ;
     then
         $SCRIPTS_PATH/uid.sh $2 $3 $4 $5 $6
