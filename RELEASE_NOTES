@@ -1,7 +1,9 @@
-2.2
+2.3
 20/02/2018
 -Mettre à jour les scripts et le lanceur avec la commande 'lbp update' (amélioration)
 -Ajout du script logs pour modifier le niveau de log
 -Ajout d'url perso dans le script urls
 -Correctif du script framework
 -Ajout de l'option decrement et increment dans le script pom
+-Les espaces des arguments pour le script cmd sont supportés
+-Affichage du composant en cours avant traitement (pour voir quel projet plante si il y a un bug)

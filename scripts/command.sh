@@ -10,7 +10,7 @@
 
 . $ROOT_PATH/functions.sh
 export gcol
-args=$@
+args=`echo "$@" | sed 's/ $//g'`
 
 printHelp "$args" "command.sh" "Exécute une commande dans tous les répertoires" "command/cmd" "Pas d'arguments" "lbp command ls -l"
 
@@ -32,7 +32,8 @@ do
 
     printProjectInfoTemp "$projectName" "nc"
 
-    callStr="$1 "
+    callStr=""
+    argsStr=""
     cpt=0
     for param in "$@"
     do
@@ -40,7 +41,7 @@ do
         then
             if [ `echo "$param" | grep " " -c` -gt 0 ] ;
             then
-                callStr="$callStr\"$param\" "
+                argsStr="$argsStr$param "
             else
                 callStr="$callStr$param "
             fi
@@ -48,7 +49,12 @@ do
         let cpt=$cpt+1
     done
 
-    resp=`$callStr 2>&1`
+    if [ -n "$argsStr" ] ;
+    then
+        resp=`$1 $callStr "$argsStr" 2>&1`
+    else
+        resp=`$1 $callStr 2>&1`
+    fi
 
     printProjectInfo "$projectName" "valid"
     echo "$resp" | sed "s/^/ ╞───/g" | sed "/^ ╞───$/d"

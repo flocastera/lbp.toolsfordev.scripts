@@ -28,6 +28,7 @@ then
     do
         projectName=$(echo $projectPath | grep -Eo "$projectNamePatterns")
         cd $projectPath
+        printProjectInfoTemp "$projectName" "nc"
 
         result=`git merge $mergeArgs 2>&1`
 

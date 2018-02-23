@@ -110,12 +110,12 @@ then
                 elif [ $typeUpdate == "toolbox" ] ;
                 then
                     searchPom="<toolbox\.adb\.version>.*</toolbox\.adb\.version>"
-                    searchJS="src=\"\.\./webjars/cc3toolbox/.*/js/toolbox\-bundle(\.min)?\.js\""
-                    searchCSS="href=\"\.\./webjars/cc3toolbox/.*/styles/css/bundle/toolbox\-bundle(\.min)?\.css\""
+                    searchJS="src=\"\.\./webjars/cc3toolbox/.*/js/toolbox\-bundle"
+                    searchCSS="href=\"\.\./webjars/cc3toolbox/.*/styles/css/bundle/toolbox\-bundle"
 
                     replacementPom="<toolbox\.adb\.version>$numVersion</toolbox\.adb\.version>"
-                    replacementJS="src=\"\.\./webjars/cc3toolbox/$numVersion/js/toolbox\-bundle\.min\.js\""
-                    replacementCSS="href=\"\.\./webjars/cc3toolbox/$numVersion/styles/css/bundle/toolbox\-bundle\.min\.css\""
+                    replacementJS="src=\"\.\./webjars/cc3toolbox/$numVersion/js/toolbox\-bundle"
+                    replacementCSS="href=\"\.\./webjars/cc3toolbox/$numVersion/styles/css/bundle/toolbox\-bundle"
 
                     result="$result`sed -i -e "s@$searchPom@$replacementPom@g" pom.xml 2>&1`"
                     result="$result`sed -i -e "s@$searchJS@$replacementJS@g" $pathHtmls/index.html 2>&1`"
