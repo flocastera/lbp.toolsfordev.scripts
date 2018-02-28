@@ -15,6 +15,7 @@ args=$@
 urlLocal="http://localhost:8080"
 urlTas="http://h50-intranetsf-slot1-asse-cc3r5e1-unsecured.service-dev.stomv2.hpmetier.sf.intra.laposte.fr"
 urlTfo="http://h50-intranetsf-slot1-tfon-cc3r5e1-unsecured.service-dev.stomv2.hpmetier.sf.intra.laposte.fr"
+urlTbeb="http://h50-intranetsf-slot1-tbeb-cc3r5e1-unsecured.service-dev.stomv2.hpmetier.sf.intra.laposte.fr"
 
 urlName=`echo "$args" | grep -E -o "perso=[a-zA-Z0-9]+" | sed 's/perso=//g'`
 url=`cat $SCRIPTS_PATH/urlsPerso.txt | grep -E "${urlName}===>.*" | sed "s/${urlName}===>//g"`
@@ -27,7 +28,7 @@ if [ -z "$args" ] ;
 then
     printTitle "Listing urls in all projects' GCP"
 else
-    if [ "$args" == "tass" ] || [ "$args" == "tfo" ] || [ "$args" == "local" ] || [ `echo "$args" | grep -E "perso=[a-zA-Z0-9]+" -c` -gt 0 ] ;
+    if [ "$args" == "tass" ] || [ "$args" == "tfo" ] || [ "$args" == "tpb" ] || [ "$args" == "local" ] || [ `echo "$args" | grep -E "perso=[a-zA-Z0-9]+" -c` -gt 0 ] ;
     then
         printTitle "Changing urls in all projects' GCP to $(tput setaf 3)$args$(tput sgr 0)"
     elif [ `echo "$args" | grep -E "(--add|-a)" -ci` != "0" ] ;
@@ -114,6 +115,10 @@ do
         then
             printProjectInfo "$projectName" "valid"
             sed -i -e "s@^ASSEMBLAGE_HTTP_URL_BASE=.*@ASSEMBLAGE_HTTP_URL_BASE=${urlTfo}@g" $projectPath/src/main/resources/gcp.properties
+        elif [ "$args" == "tpb" ] ;
+        then
+            printProjectInfo "$projectName" "valid"
+            sed -i -e "s@^ASSEMBLAGE_HTTP_URL_BASE=.*@ASSEMBLAGE_HTTP_URL_BASE=${urlTbeb}@g" $projectPath/src/main/resources/gcp.properties
         elif [ "$args" == "local" ] ;
         then
             printProjectInfo "$projectName" "valid"

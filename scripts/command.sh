@@ -9,7 +9,9 @@
 ################################E
 
 . $ROOT_PATH/functions.sh
-export gcol
+
+if [ -f ~/.bash_functions ]; then source ~/.bash_functions; fi
+
 args=`echo "$@" | sed 's/ $//g'`
 
 printHelp "$args" "command.sh" "Exécute une commande dans tous les répertoires" "command/cmd" "Pas d'arguments" "lbp command ls -l"
