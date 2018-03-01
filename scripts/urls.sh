@@ -66,9 +66,10 @@ hasArgument "$args" "list;l"
 if [ $? -eq 1 ] ;
 then
 
-    printProjectLine "$(tput setaf 2)local$(tput sgr 0) $urlLocal => '$(tput setaf 3)lbp urls local$(tput sgr 0)'"
-    printProjectLine "$(tput setaf 2)tass$(tput sgr 0) $urlTas => '$(tput setaf 3)lbp urls tass$(tput sgr 0)'"
-    printProjectLine "$(tput setaf 2)tfo$(tput sgr 0) $urlTfo => '$(tput setaf 3)lbp urls tfo$(tput sgr 0)'"
+    printProjectLine "$(tput setaf 2)War local$(tput sgr 0)          => '$(tput setaf 3)lbp urls local$(tput sgr 0)' => $urlLocal"
+    printProjectLine "$(tput setaf 2)Tests d'assemblage$(tput sgr 0) => '$(tput setaf 3)lbp urls tass$(tput sgr 0)'  => $urlTas"
+    printProjectLine "$(tput setaf 2)Tests fonctionnels$(tput sgr 0) => '$(tput setaf 3)lbp urls tfo$(tput sgr 0)'   => $urlTfo"
+    printProjectLine "$(tput setaf 2)Tests bout en bout$(tput sgr 0) => '$(tput setaf 3)lbp urls tpb$(tput sgr 0)'   => $urlTbeb"
     printLine
 
     res=`cat $SCRIPTS_PATH/urlsPerso.txt`
@@ -76,7 +77,7 @@ then
     do
         urlName=`echo "$perso" | grep -E -o "^[a-zA-Z0-9]+"`
         urlPath=`echo "$perso" | grep -E "===>.*" | sed "s/^.*===>//g"`
-        printProjectLine "$(tput setaf 2)$urlName$(tput sgr 0) $urlPath => '$(tput setaf 3)lbp urls perso=$urlName$(tput sgr 0)'"
+        printProjectLine "$(tput setaf 2)$urlName$(tput sgr 0) => '$(tput setaf 3)lbp urls perso=$urlName$(tput sgr 0)' => $urlPath"
     done
 
     printLine
