@@ -8,6 +8,7 @@
 #   Pas d'arguments
 ################################E
 
+echo "test cmd: $VAR_TEST"
 . $ROOT_PATH/functions.sh
 
 if [ -f ~/.bash_functions ]; then source ~/.bash_functions; fi
@@ -24,7 +25,7 @@ totalErrors=0
 totalIgnored=0
 totalSuccess=0
 
-patterns=`cat $ROOT_PATH/.lbpexclude`
+patterns=`cat $EXCLUDE_GROUP_FILE`
 loops=`find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns" | grep -F -v "${patterns}"`
 
 for projectPath in $loops

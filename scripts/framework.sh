@@ -20,7 +20,7 @@ then
     printInfo "Affiche de la façon suivante : pom.xml / index.template.html / index.html"
     printLine
 
-    patterns=`cat $ROOT_PATH/.lbpexclude`
+    patterns=`cat $EXCLUDE_GROUP_FILE`
     loops=`find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns" | grep -F -v "${patterns}"`
 
     for projectPath in $loops

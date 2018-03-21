@@ -10,7 +10,7 @@
 
 . $ROOT_PATH/functions.sh
 args=`echo "$@" | grep -E -o "\-{1,2}[^($| )]+"`
-tasks=`echo "$@" | grep -E -o "(^| )+[a-zA-Z]+"`
+tasks=`echo "$@" | grep -E -o "(^| )+[a-zA-Z:]+"`
 
 printHelp "$args" "grunt.sh" "Exécute les tâches Grunt passées en paramètres et présentes dans le Gruntfile.js" "grunt/grt" "--all/-a=Exécute browserify et cssmin;--detail/-d=Affiche la sortie console de Grunt" "lbp grunt -ad;lbp grt cssmin --detail"
 
@@ -39,7 +39,7 @@ totalIgnored=0
 totalSuccess=0
 
 # Looping over directories in Workspace path
-patterns=`cat $ROOT_PATH/.lbpexclude`
+patterns=`cat $EXCLUDE_GROUP_FILE`
 loops=`find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns" | grep -F -v "${patterns}"`
 
 for projectPath in $loops

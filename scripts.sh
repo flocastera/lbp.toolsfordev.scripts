@@ -4,6 +4,10 @@
 
 source $ROOT_PATH/configuration.sh
 
+echo
+echo "$(tput setaf 1)WSP$(tput sgr 0):    '$WSP_PATH'"
+echo "$(tput setaf 1)Exlude$(tput sgr 0): '$EXCLUDE_GROUP_FILE'"
+
 if [ $# -gt 0 ]
 then
     if [ "$1" == "update" ] ;
@@ -12,6 +16,9 @@ then
     elif [ "$1" == "status" ] || [ "$1" == "gst" ] ;
     then
         $SCRIPTS_PATH/status.sh $2 $3 $4 $5 $6
+    elif [ "$1" == "stats" ] || [ "$1" == "sta" ] ;
+    then
+        $SCRIPTS_PATH/stats.sh $2 $3 $4 $5 $6
     elif [ "$1" == "clone" ] || [ "$1" == "gcl" ] ;
     then
         $SCRIPTS_PATH/clone.sh $2 $3 $4 $5 $6
@@ -54,6 +61,9 @@ then
     elif [ "$1" == "logs" ] || [ "$1" == "lo" ] ;
     then
         $SCRIPTS_PATH/log.sh $2 $3 $4 $5 $6
+    elif [ "$1" == "workspace" ] || [ "$1" == "wsp" ] ;
+    then
+        $SCRIPTS_PATH/workspace.sh $2 $3 $4 $5 $6
     elif [ "$1" == "--help" ] || [ "$1" == "-h" ] ;
     then
         $SCRIPTS_PATH/../fullHelp.sh $2 $3 $4 $5 $6

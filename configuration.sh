@@ -12,6 +12,9 @@ export WSP_PATH=$WSP_PATH
 export SCRIPTS_PATH=""
 export repositoriesList=""
 
+export WORKSPACES=""
+export EXCLUDE_GROUP_FILE=""
+
 # Sert à l'affichage des noms de projets, modifier la regexp si vous renommez vos projets
 export projectNamePatterns="(module\-applicatif|composants\-applicatifs)\-(H[0-9]{2}\-)?[a-zA-Z]+"
 

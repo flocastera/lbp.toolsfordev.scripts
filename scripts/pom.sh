@@ -28,7 +28,7 @@ then
     fi
     printLine
 
-    patterns=`cat $ROOT_PATH/.lbpexclude`
+    patterns=`cat $EXCLUDE_GROUP_FILE`
     loops=`find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns" | grep -F -v "${patterns}"`
 
     for projectPath in $loops
@@ -68,7 +68,7 @@ then
     printInfo "$(tput setaf 3)Ne pas utiliser Ctrl+C, ou alors supprimer le fichier tmpFile à la racine$(tput sgr 0)"
     printLine
 
-    patterns=`cat $ROOT_PATH/.lbpexclude`
+    patterns=`cat $EXCLUDE_GROUP_FILE`
     loops=`find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns" | grep -F -v "${patterns}"`
 
     tempFile="$WSP_PATH/tmpFile"

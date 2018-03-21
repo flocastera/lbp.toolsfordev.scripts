@@ -200,7 +200,13 @@ printResumeLine(){
     else
         str="$str "
     fi
-    str="$str: $value"
+
+    if [ -n "$libelle" ] ;
+    then
+        str="$str: $value"
+    else
+        str=" │"
+    fi
 
     echo "$str"
 }

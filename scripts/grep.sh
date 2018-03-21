@@ -30,7 +30,7 @@ printInfo "Exclude : '$(tput setaf 3)$exludesPaths$(tput sgr 0)'"
 printInfo "Args : '$defaultArgs'"
 printLine
 
-patterns=`cat $ROOT_PATH/.lbpexclude`
+patterns=`cat $EXCLUDE_GROUP_FILE`
 loops=`find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns" | grep -F -v "${patterns}"`
 
 for projectPath in $loops

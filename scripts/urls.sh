@@ -87,7 +87,7 @@ then
 fi
 
 
-patterns=`cat $ROOT_PATH/.lbpexclude`
+patterns=`cat $EXCLUDE_GROUP_FILE`
 loops=`find $WSP_PATH -maxdepth 1 -type d | grep -E "$watchPatterns" | grep -F -v "${patterns}"`
 
 for projectPath in $loops
@@ -100,10 +100,12 @@ do
     if [ -z "$args" ] ;
     then
         result=`grep -E '^ASSEMBLAGE_HTTP_URL_BASE=.*' $projectPath/src/main/resources/gcp.properties | grep -E '=.*' -o | sed -e "s@^=@@" | grep --color=always -E "//.*"`
+        resultTest=`grep -E '^ASSEMBLAGE_HTTP_URL_BASE=.*' $projectPath/src/test/resources/gcp.properties 2>&1 | grep -E '=.*' -o | sed -e "s@^=@@" | grep --color=always -E "//.*"`
         if [ -n "$result" ] ;
         then
             printProjectInfo "$projectName" "valid"
-            printProjectLine "$result"
+            printProjectLine "Main : $result"
+            printProjectLine "Test : $resultTest"
         else
             printProjectInfo "$projectName" "nc" "Pas de GCP ou pas de résultat"
         fi
@@ -111,22 +113,42 @@ do
         if [ "$args" == "tass" ] ;
         then
             printProjectInfo "$projectName" "valid"
-            sed -i -e "s@^ASSEMBLAGE_HTTP_URL_BASE=.*@ASSEMBLAGE_HTTP_URL_BASE=${urlTas}@g" $projectPath/src/main/resources/gcp.properties
+            sed -i -e "s@^ASSEMBLAGE_HTTP_URL_BASE=.*@ASSEMBLAGE_HTTP_URL_BASE=${urlTas}@g" $projectPath/src/main/resources/gcp.properties 2>&1
+            if [ -f $projectPath/src/test/resources/gcp.properties ] ;
+            then
+                sed -i -e "s@^ASSEMBLAGE_HTTP_URL_BASE=.*@ASSEMBLAGE_HTTP_URL_BASE=${urlTas}@g" $projectPath/src/test/resources/gcp.properties 2>&1
+            fi
         elif [ "$args" == "tfo" ] ;
         then
             printProjectInfo "$projectName" "valid"
-            sed -i -e "s@^ASSEMBLAGE_HTTP_URL_BASE=.*@ASSEMBLAGE_HTTP_URL_BASE=${urlTfo}@g" $projectPath/src/main/resources/gcp.properties
+            sed -i -e "s@^ASSEMBLAGE_HTTP_URL_BASE=.*@ASSEMBLAGE_HTTP_URL_BASE=${urlTfo}@g" $projectPath/src/main/resources/gcp.properties 2>&1
+            if [ -f $projectPath/src/test/resources/gcp.properties ] ;
+            then
+                sed -i -e "s@^ASSEMBLAGE_HTTP_URL_BASE=.*@ASSEMBLAGE_HTTP_URL_BASE=${urlTfo}@g" $projectPath/src/test/resources/gcp.properties 2>&1
+            fi
         elif [ "$args" == "tpb" ] ;
         then
             printProjectInfo "$projectName" "valid"
-            sed -i -e "s@^ASSEMBLAGE_HTTP_URL_BASE=.*@ASSEMBLAGE_HTTP_URL_BASE=${urlTbeb}@g" $projectPath/src/main/resources/gcp.properties
+            sed -i -e "s@^ASSEMBLAGE_HTTP_URL_BASE=.*@ASSEMBLAGE_HTTP_URL_BASE=${urlTbeb}@g" $projectPath/src/main/resources/gcp.properties 2>&1
+            if [ -f $projectPath/src/test/resources/gcp.properties ] ;
+            then
+                sed -i -e "s@^ASSEMBLAGE_HTTP_URL_BASE=.*@ASSEMBLAGE_HTTP_URL_BASE=${urlTbeb}@g" $projectPath/src/test/resources/gcp.properties 2>&1
+            fi
         elif [ "$args" == "local" ] ;
         then
             printProjectInfo "$projectName" "valid"
-            sed -i -e "s@^ASSEMBLAGE_HTTP_URL_BASE=.*@ASSEMBLAGE_HTTP_URL_BASE=${urlLocal}@g" $projectPath/src/main/resources/gcp.properties
+            sed -i -e "s@^ASSEMBLAGE_HTTP_URL_BASE=.*@ASSEMBLAGE_HTTP_URL_BASE=${urlLocal}@g" $projectPath/src/main/resources/gcp.properties 2>&1
+            if [ -f $projectPath/src/test/resources/gcp.properties ] ;
+            then
+                sed -i -e "s@^ASSEMBLAGE_HTTP_URL_BASE=.*@ASSEMBLAGE_HTTP_URL_BASE=${urlLocal}@g" $projectPath/src/test/resources/gcp.properties 2>&1
+            fi
         elif [ `echo "$args" | grep -E "perso=[a-zA-Z0-9]+" -c` -gt 0 ] && [ ! -z "$url" ] ;
         then
-            sed -i -e "s@^ASSEMBLAGE_HTTP_URL_BASE=.*@ASSEMBLAGE_HTTP_URL_BASE=${url}@g" $projectPath/src/main/resources/gcp.properties
+            sed -i -e "s@^ASSEMBLAGE_HTTP_URL_BASE=.*@ASSEMBLAGE_HTTP_URL_BASE=${url}@g" $projectPath/src/main/resources/gcp.properties 2>&1
+            if [ -f $projectPath/src/test/resources/gcp.properties ] ;
+            then
+                sed -i -e "s@^ASSEMBLAGE_HTTP_URL_BASE=.*@ASSEMBLAGE_HTTP_URL_BASE=${url}@g" $projectPath/src/test/resources/gcp.properties 2>&1
+            fi
             printProjectInfo "$projectName" "valid"
         else
             printProjectInfo "$projectName" "error"

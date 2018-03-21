@@ -49,10 +49,11 @@ else
 
     # Paramètrage du fichier configuration.sh
     setx ROOT_PATH "$scriptsPath"
+    setx SCRIPT_LOOP_GROUP "$ROOT_PATH/.lbpexclude"
     sed -i -e "s@SCRIPTS_PATH=.*@SCRIPTS_PATH=${scriptsPath}/scripts@g" $scriptsPath/configuration.sh
     sed -i -e "s@repositoriesList=.*@repositoriesList=${scriptsPath}/repositories.txt@g" $scriptsPath/configuration.sh
 
-    if [ ! -f /tmp/foo.txt ]; then
+    if [ ! -f $scriptsPath/.lbpexclude ]; then
         touch $scriptsPath/.lbpexclude
         echo "# Entrer ici le nom d'un projet à exclure (Exemple: FinalisationEntretien ou composants-applicatifs-VentePanier)" > .lbpexclude
     fi
