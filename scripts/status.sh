@@ -43,10 +43,24 @@ do
     if [ $? -eq 1 ] ;
     then
         nullll=`git remote update 2>&1`
-        statusToRemote=`git status -uno | grep -Eo -m 1 "(up\-to\-date|behind|ahead)+"`
+        statusToRemote=`git status -uno | grep -Eo -m 1 "(up\-to\-date|behind|ahead|diverged)+"`
         if [ -n "$statusToRemote" ] ;
         then
-            statusToRemote="$statusToRemote to 'origin'"
+            if [ "$statusToRemote" == "up-to-date" ] ;
+            then
+                statusToRemote="$(tput setaf 2)À jour$(tput sgr 0)"
+            elif [ "$statusToRemote" == "behind" ] ;
+            then
+                statusToRemote="$(tput setaf 3)Pull nécessaire !$(tput sgr 0)"
+            elif [ "$statusToRemote" == "ahead" ] ;
+            then
+                statusToRemote="$(tput setaf 3)Des commits sont en attente d'envoi !$(tput sgr 0)"
+            elif [ "$statusToRemote" == "diverged" ] ;
+            then
+                statusToRemote="$(tput setaf 2)Divergence !$(tput sgr 0)"
+            else
+                statusToRemote=""
+            fi
         else
             statusToRemote=""
         fi
@@ -56,7 +70,7 @@ do
     if [ $? -eq 1 ] ;
     then
         branch=`git rev-parse --abbrev-ref HEAD`
-        branch="on branch $(tput setaf 3)$branch$(tput sgr 0)"
+        branch="$(tput setaf 6)($branch)$(tput sgr 0)"
     fi
 
     result=`git status -s 2>&1`                                  # Getting general status for project
@@ -81,7 +95,7 @@ do
     # Display and total calculation
     if [ "$total" != "0" ] ;
     then
-        printProjectInfo "$projectName" "error" "$branch" "$statusToRemote"
+        printProjectInfo "$projectName $branch" "error" "$statusToRemote"
 
         let "totalFilesCount = $totalFilesCount + $total"
 
@@ -122,7 +136,7 @@ do
         fi
         printLine
     else
-        printProjectInfo "$projectName" "valid" "$branch" "$statusToRemote"
+        printProjectInfo "$projectName $branch" "valid" "$statusToRemote"
         printLine
     fi
 done

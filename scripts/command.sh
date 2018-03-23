@@ -8,7 +8,6 @@
 #   Pas d'arguments
 ################################E
 
-echo "test cmd: $VAR_TEST"
 . $ROOT_PATH/functions.sh
 
 if [ -f ~/.bash_functions ]; then source ~/.bash_functions; fi

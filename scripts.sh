@@ -5,8 +5,8 @@
 source $ROOT_PATH/configuration.sh
 
 echo
-echo "$(tput setaf 1)WSP$(tput sgr 0):    '$WSP_PATH'"
-echo "$(tput setaf 1)Exlude$(tput sgr 0): '$EXCLUDE_GROUP_FILE'"
+echo "...$(tput setaf 3)WSP$(tput sgr 0) : '$(echo $WSP_PATH | grep -E '/[a-zA-Z0-9_-]+(/)?$' --color=always)'"
+echo "$(tput setaf 3)Exlude$(tput sgr 0) : '$(echo $EXCLUDE_GROUP_FILE | grep -E '/[\.a-zA-Z0-9_-]+(/)?$' --color=always)'"
 
 if [ $# -gt 0 ]
 then
