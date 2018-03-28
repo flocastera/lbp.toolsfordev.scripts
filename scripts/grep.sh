@@ -14,7 +14,7 @@
 
 defaultArgs="-nR --color=always $3 $4 $5"
 exludesPaths="--exclude-dir=\.(git|classpath|externalToolBuilders|project|settings) --exclude-dir=node_modules --exclude-dir=target --exclude=npm-debug.log --exclude=*.log"
-grepSearch="$2"
+grepSearch="$1"
 args="$1 $2 $3 $4 $5"
 
 totalMatchCount=0
@@ -80,6 +80,8 @@ do
             printLine
             continue
         fi
+
+        printLine
     else
         printProjectInfo "$projectName" "error"
         printLine
