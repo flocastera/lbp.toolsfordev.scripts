@@ -1,7 +1,23 @@
 #!/bin/bash
 
+
+################################B
+# workspace.sh
+# Appel : workspace/wsp
+# Description : Permet d'ajouter un workpace, switcher de workspace et switcher de groupe d'exclusion
+# Args :
+#   --add/-a    : Ajouter un workspace ex => lbp wsp --add jdk8 /d/data/espdev/cc3env/workspaceJDK8
+#   --switch/-s : Changer de workspace par défaut ex => lbp wsp -s jdk8
+#   --group/-g  : Changer de groupe d'exclusions par défaut ex => lbp wsp --group h55
+################################E
+
+
 . $ROOT_PATH/functions.sh
 args=$@
+
+
+printHelp "$args" "workspace.sh" "Permet d'ajouter un workpace, switcher de workspace et switcher de groupe d'exclusion" "workspace/wsp" "--add/-a=Ajouter un workspace;--switch/-s=Changer le workspace par défaut;--group/-g=Permet de changer le groupe d'exclusion" "lbp wsp -a jdk8 /chemin/du/workspace;lbp wsp -s;lbp wsp -s jdk8;lbp wsp -g;lbp wsp -g h55"
+
 
 path="$(pwd)"
 

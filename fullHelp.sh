@@ -24,9 +24,9 @@ echo
 
 if [ -n "$1" ] ;
 then
-    scriptList=`find $SCRIPTS_PATH -maxdepth 1 -type f | grep "$1"`
+    scriptList=`find $SCRIPTS_PATH -maxdepth 1 -type f -name "*.sh" | grep "$1"`
 else
-    scriptList=`find $SCRIPTS_PATH -maxdepth 1 -type f`
+    scriptList=`find $SCRIPTS_PATH -maxdepth 1 -type f -name "*.sh"`
 fi
 
 for scr in $scriptList

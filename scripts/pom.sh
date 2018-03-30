@@ -8,13 +8,14 @@
 #   --all/-a        : Permet d'afficher les dépendances pour chaque projet
 #   --sync/-s       : Permet de synchroniser les verions des dépendances avec les pom.xml des projects locaux
 #   --increment/-i  : Permet d'incrémenter de 1 la version de tous les poms (--snapshot pour ajouter le suffixe -SNAPSHOT)
+#   --decrement/-d  : Permet de décrémenter de 1 la version de tous les poms (--snapshot pour ajouter le suffixe -SNAPSHOT)
 ################################E
 
 . $ROOT_PATH/functions.sh
 path="$(pwd)"
 args=$@
 
-printHelp "$args" "pom.sh" "Ce script permet de dresser la liste des versions" "pom/po" "--full/-f=Affiche les dépendances;--sync/-s=Synchronise les dépendances" "lbp pom --sync;lbp pom;lbp pom -f"
+printHelp "$args" "pom.sh" "Ce script permet de dresser la liste des versions" "pom/po" "--all/-a=Affiche les dépendances;--sync/-s=Synchronise les dépendances;--increment/-i=Incrémente la version du projet;--decrement/-d=Décrémente la version du projet" "lbp pom --sync;lbp pom;lbp pom -a;lbp pom -i --snapshot;lbp pom --decrement"
 
 hasArgument "$args" "all;a"
 if [ $? -eq 1 ] || [ -z "$args" ] ;

@@ -2,12 +2,10 @@
 
 ################################B
 # grep.sh
-# Appel : grep/grp
+# Appel : grep/grp (ne pas utiliser)
 # Description : Permet de trouver toutes les occurences d'une expression dans tous les projets
 # Args :
-#   --hide/-h   : Permet de cacher les fichiers à ne pas commiter (AccreditationService, SecurityBouchonConfig, pom.xml, ...)
-#   --update/-u : Permet de rafraichir le dépôt local et indique s'il est à jour ou derrière/devant le dépot distant
-#   --branch/-b : Permet d'afficher la branche courante
+#   Pas d'arguments
 ################################E
 
 . $ROOT_PATH/functions.sh

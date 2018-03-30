@@ -3,7 +3,7 @@
 ################################B
 # urls.sh
 # Appel : urls/ur
-# Description : Permet d'afficher ou modifier les urls d'assemblages dans les gcp
+# Description : Permet d'afficher ou modifier les urls d'assemblages dans les gcp (pour les urls perso : lbp urls perso=nomurl)
 # Args :
 #   --list/-l   : Liste toutes les urls disponibles et leur emploi
 #   --add/-a    : Ajoute une url custom de cette façon : lbp urls -a fca "http://blabla:8080"
@@ -19,10 +19,8 @@ urlTbeb="http://h50-intranetsf-slot1-tbeb-cc3r5e1-unsecured.service-dev.stomv2.h
 
 urlName=`echo "$args" | grep -E -o "perso=[a-zA-Z0-9]+" | sed 's/perso=//g'`
 url=`cat $SCRIPTS_PATH/urlsPerso.txt | grep -E "${urlName}===>.*" | sed "s/${urlName}===>//g"`
-#sda => Saoussane ; aka => Amine Kaboussi ; lqu => Lionel Queffelec ;
-#urlPersos="sda===>http://331923SSB28.dct.adt.local:8080;aka===>http://331923SS836.dct.adt.local:8080;lqu===>http://331923SSSAZ.dct.adt.local:8080;aas===>http://331923SS616.dct.adt.local:8080;"
 
-printHelp "$args" "urls.sh" "Permet d'afficher ou modifier les urls d'assemblages dans les gcp" "urls/ur" "--list/-l=Liste toutes les urls disponibles et leur emploi;--add/-a=Ajoute une url custom de cette façon : lbp urls -a fca "http://blabla:8080"" "lbp urls tass;lbp urls;lbp urls --list;lbp urls -a fca 'http://ip:8080'"
+printHelp "$args" "urls.sh" "Permet d'afficher ou modifier les urls d'assemblages dans les gcp" "urls/ur" "--list/-l=Liste toutes les urls disponibles et leur emploi;--add/-a=Ajoute une url custom de cette façon : lbp urls -a fca 'http://blabla:8080'" "lbp urls tass;lbp urls;lbp urls --list;lbp urls -a fca 'http://ip:8080';lbp urls perso=fca"
 
 if [ -z "$args" ] ;
 then

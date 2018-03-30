@@ -49,9 +49,10 @@ else
 
     # Paramètrage du fichier configuration.sh
     setx ROOT_PATH "$scriptsPath"
-    setx SCRIPT_LOOP_GROUP "$ROOT_PATH/.lbpexclude"
+    setx EXCLUDE_GROUP_FILE "$ROOT_PATH/.lbpexclude"
     sed -i -e "s@SCRIPTS_PATH=.*@SCRIPTS_PATH=${scriptsPath}/scripts@g" $scriptsPath/configuration.sh
     sed -i -e "s@repositoriesList=.*@repositoriesList=${scriptsPath}/repositories.txt@g" $scriptsPath/configuration.sh
+    sed -i -e "s@EXCLUDE_GROUP_FILE=.*@EXCLUDE_GROUP_FILE=${scriptsPath}/.lbpexclude@g" $scriptsPath/configuration.sh
 
     if [ ! -f $scriptsPath/.lbpexclude ]; then
         touch $scriptsPath/.lbpexclude
@@ -76,24 +77,19 @@ else
     fi
 
     echo
-    echo "[$(tput setaf 3)!$(tput sgr 0)] Merci de créer une variable d'environnement de compte nommé 'WSP_PATH'"
-    echo "[$(tput setaf 3)!$(tput sgr 0)] Procédure : "
-    echo "      1. Ouvrir le menu démarrer"
-    echo "      2. Taper 'variable' et sélectionner 'Modifier les variables d'environnements pour votre compte'"
-    echo "      3. Cliquer sur 'Nouvelle', renseigner 'WSP_PATH' dans le premier champ"
-    echo "      4. Pour connaître l'emplacement du workspace, aller dedans avec git bash et taper 'pwd'"
-    echo "      5. Coller dans le second champ ce qui a été produit par la commande précédente"
-
-    echo
-    read -p "Valider l'action précédente (y/n) : " valid
+    read -p "Configurer un workspace maintenant ? (y/n) : " valid
     echo
     if [ "$valid" == "y" ] || [ "$valid" == "Y" ] ;
     then
-        echo "$(tput setaf 2)Installation terminée$(tput sgr 0)"
+        read -p "Nom du workspace : " wspName
+        read -p "Chemin du workspace : " wspPath
     else
-        echo "$(tput setaf 1)Les scripts ont besoin de la variable d'environnement !$(tput sgr 0)"
+        echo "$(tput setaf 1)Ne pas oublier de configurer un workspace => lbp wsp -a <nom> <chemin>$(tput sgr 0)"
+        echo "$(tput setaf 1)Et surtout de le mettre par défaut => lbp wsp -s <nom> !$(tput sgr 0)"
     fi
 
+    echo
+    echo "$(tput setaf 2)Installation terminée$(tput sgr 0)"
     echo
     echo "[$(tput setaf 3)!$(tput sgr 0)] Pour prendre en compte les modifications, redémarrer la CLI."
     echo "[$(tput setaf 3)!$(tput sgr 0)] Une fois la CLI relancée, tapez lbp --help pour vérifier que tout a bien fonctionné."

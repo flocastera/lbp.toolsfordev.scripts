@@ -3,7 +3,7 @@
 ################################B
 # log.sh
 # Appel : logs/lo
-# Description : Permet de modifier les niveaux de logs pour les frameworks
+# Description : Permet de modifier les niveaux de logs pour les frameworks (info, debug)
 # Args :
 #   Pas d'arguments
 ################################E
@@ -11,7 +11,7 @@
 . $ROOT_PATH/functions.sh
 args=$@
 
-printHelp "$args" "log.sh" "Permet de modifier les niveaux de logs pour les frameworks" "Pas d'arguments" "lbp log info"
+printHelp "$args" "log.sh" "Permet de modifier les niveaux de logs pour les frameworks" "Pas d'arguments" "lbp log info;lbp log debug"
 
 level=""
 
