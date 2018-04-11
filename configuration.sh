@@ -7,12 +7,12 @@
 # lister les différents projets
 # Exemple de valorisation dans ce fichier :
 #   export WSP_PATH="D:/ATAD/VEDPSE/vne3cc/nomDuWorkspace8/"
-export WSP_PATH=$WSP_PATH
+export WSP_PATH="/d/DATA/ESPDEV/cc3env/workspaceJDK8"
 
 export SCRIPTS_PATH=""
 export repositoriesList=""
 
-export WORKSPACES=""
+export WORKSPACES="jdk8==/d/DATA/ESPDEV/cc3env/workspaceJDK8"
 export EXCLUDE_GROUP_FILE=""
 
 # Sert à l'affichage des noms de projets, modifier la regexp si vous renommez vos projets

@@ -70,7 +70,7 @@ do
     if [ $? -eq 1 ] ;
     then
         branch=`git rev-parse --abbrev-ref HEAD`
-        branch="$(tput setaf 6)($branch)$(tput sgr 0)"
+        branch=" $(tput setaf 6)($branch)$(tput sgr 0)"
     fi
 
     result=`git status -s 2>&1`                                  # Getting general status for project
@@ -136,7 +136,7 @@ do
         fi
         printLine
     else
-        printProjectInfo "$projectName $branch" "valid" "$statusToRemote"
+        printProjectInfo "${projectName}${branch}" "valid" "$statusToRemote"
         printLine
     fi
 done
