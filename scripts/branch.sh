@@ -14,8 +14,8 @@ mergeArgs="$@"
 
 printHelp "$mergeArgs" "branch.sh" "Exécute une action Git relative aux branches" "branch/gbr" "" "lbp gbr livraison_r5;lbp branch <nouvelle_branche> -b"
 
-if [ $# -gt 0 ];
-then
+    if [ $# -gt 0 ];
+    then
 
     printTitle "Switching branch to branch '$1'"
     printInfo "Arguments : '$(tput setaf 2)$mergeArgs$(tput sgr 0)'"
